@@ -52,8 +52,8 @@ class _CreateCsrPageState extends State<CreateCsrPage> {
 
       var csr = certService.generateCSR(info);
 
-      var file = File(privateKeyPath!);
-      await file.writeAsString(csr);
+      var csrFile = File(csrPath!);
+      await csrFile.writeAsString(csr);
 
       Dialogs.showShortSnackBar(this, 'Certificate signing request is generated.');
     } catch (e) {
