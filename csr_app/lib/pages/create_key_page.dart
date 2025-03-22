@@ -77,12 +77,12 @@ class _CreateKeyPageState extends State<CreateKeyPage> {
           Text('Create certificate private key', style: textTheme.titleLarge),
           const SizedBox(height: 20),
           //
-          Text('Key size (bits)', style: textTheme.bodyLarge),
           TextField(
             controller: tecKeySize,
             enabled: !isLoading,
             decoration: InputDecoration(
               isDense: true,
+              label: Text('Key size (bits)'),
               border: OutlineInputBorder(),
             ),
           ),
