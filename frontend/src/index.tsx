@@ -7,6 +7,8 @@ import App from "./routes/App";
 import Dashboard from "./routes/Dashboard";
 
 const root = document.getElementById("root");
+const html = document.getElementsByTagName("html")[0];
+html.dataset.theme = "cupcake";
 
 if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   throw new Error(
