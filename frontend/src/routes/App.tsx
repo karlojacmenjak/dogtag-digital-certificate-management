@@ -1,8 +1,10 @@
+import { useNavigate } from "@solidjs/router";
 import type { Component } from "solid-js";
 import { Password } from "../components/password";
 import { Username } from "../components/username";
 
 const App: Component = () => {
+  const navigate = useNavigate();
   return (
     <div class="flex flex-row min-h-screen justify-center items-center">
       <div class="card card-border bg-base-100 w-96 shadow-sm">
@@ -25,7 +27,12 @@ const App: Component = () => {
             <Password />
           </div>
           <div class="card-actions justify-end p-8">
-            <button class="btn btn-primary">Login</button>
+            <button
+              class="btn btn-primary"
+              onClick={() => navigate("/dashboard", { replace: true })}
+            >
+              Login
+            </button>
           </div>
         </div>
       </div>

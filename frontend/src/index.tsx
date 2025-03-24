@@ -4,6 +4,7 @@ import { render } from "solid-js/web";
 import { Route, Router } from "@solidjs/router";
 import "./index.css";
 import App from "./routes/App";
+import Dashboard from "./routes/Dashboard";
 
 const root = document.getElementById("root");
 
@@ -17,6 +18,7 @@ render(
   () => (
     <Router>
       <Route path="/" component={App} />
+      <Route path="/dashboard" component={Dashboard} />
     </Router>
   ),
   root!
