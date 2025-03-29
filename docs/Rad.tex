@@ -1,0 +1,123 @@
+\documentclass[]{foi} 
+% zakomentirati za pisanje rada na engleskom jeziku
+% comment the above line if writing in English
+
+% \documentclass[english]{foi} 
+% odkomentirati za pisanje rada na engleskom jeziku
+% uncomment the above line if writing in English
+
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+
+\vrstaRada{\diplomski}
+% \zavrsni ili \diplomski ili \seminar ili \projekt
+% type of the paper:
+% \seminar is a seminar/term paper
+% \projekt is a project
+
+\title{Naslov rada -- \LaTeX\ Predložak}
+\predmet{}
+% ostaviti prazno ako \vrstaRada nije \projekt ili \seminar
+% \predmetBP ili \predmetDP ili \predmetTBP ili \predmetVAS ili \predmetUUI
+% leave it empty if \vrstaRada is not a \projekt or \seminar
+% \predmetBP - Databases 1
+% \predmetVAS - Multiagent Systems
+
+\author{Barica} 
+% ime i prezime studenta/studentice
+% name and surname of the author
+\spolStudenta{\zensko} 
+% \zensko ili \musko
+% student's gender for grammar purposes: \zensko = F or \musko = M
+
+\mentor{Bogdan Okreša Đurić}
+% ime i prezime mentora
+% name and surname of the mentor
+\spolMentora{\musko} 
+% \zensko ili \musko
+% mentor's gender: \zensko = F or \musko = M
+\titulaProfesora{doc.~dr.~sc.}
+% HR: dr. sc.  / doc. dr. sc. / izv. prof. dr. sc. / prof. dr. sc. 
+% mentor's title:
+% EN: -prazno- / Asst. Prof.  / Assoc. Prof.       / Full Prof.
+
+\godina{2024}
+\mjesec{rujan}
+% mjesec obrane rada ili projekta
+% year and month of the presentation of the project or paper
+
+\indeks{35918/07–R}
+% broj indeksa ili JMBAG
+% author's ID
+
+\smjer{Informacijski i poslovni sustavi}
+% (ili:
+%     Informacijski sustavi, 
+%     Poslovni sustavi, 
+%     Ekonomika poduzetništva, 
+%     Primjena informacijske tehnologije u poslovanju, 
+%     Informacijsko i programsko inženjerstvo, 
+%     Baze podataka i baze znanja, 
+%     Organizacija poslovnih sustava, 
+%     Informatika u obrazovanju
+% )
+% study programme; please enter "Erasmus" for incoming exchange students
+
+
+\sazetak{Opsega od 100 do 300 riječi. Sažetak upućuje na temu rada, ukratko se iznosi čime se rad bavi, teorijsko-metodološka polazišta, glavne teze i smjer rada te zaključci.}
+% abstract of 100 to 300 words.
+
+\kljucneRijeci{riječ; riječ; ...riječ; Obuhvaća $7\pm2$ ključna pojma koji su glavni predmet rasprave u radu.}
+% keywords including 7 +/- 2 syntagms
+
+\acrodef{VAS}{višeagentni sustav}
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\makeatletter \def\@dotsep{4.5} \makeatother
+\pagestyle{plain}
+
+
+
+\chapter{Uvod}
+
+Završni ili diplomski rad studenta/studentice je konačni rezultat uloženog napora u završetak studija. Obranom završnog ili diplomskog rada student/studentica stječe prava i obveze koje proizlaze iz završetka akademskog obrazovanja. S ciljem osiguranja potpore studentima pri pisanju završnog/diplomskog rada, izrađen je ovaj predložak oblikovanja samog rada.
+
+Načelna napomena o strukturi rada jest da se nazivi i struktura poglavlja obavezno definiraju u dogovoru s mentorom/mentoricom. Sadržajna preporuka je da u uvodu treba opisati što je tema završnog/diplomskog rada, zašto je tema značajna te koja je motivacija studenta/ studentice za odabir teme \cite{oraictolic2011AkademskoPismoStrategije}.
+
+
+
+\chapter{Metode i tehnike rada}
+
+U ovom poglavlju treba opisati koje će metode i tehnike biti korištene pri razradi teme, kako su provedene istraživačke aktivnosti, koji su programski alati ili aplikacije korišteni.
+
+\lipsum[1-2]
+
+
+
+\chapter{Razrada teme}
+
+Ovo je glavni dio rada u kojem treba razraditi temu, pojasniti istraživanja, prikazati rezultate i slično. Poželjno je na početku poglavlja dati kratki opis strukture poglavlja, kako bi čitatelj/čitateljica rada mogao/mogla lakše pratiti složenu cjelinu.
+
+
+\chapter{Zaključak}
+
+Ovdje treba sažeto rezimirati najvažnije rezultate razrade teme rada. Potrebno je sažeto opisati što je predmet rada \cite{copeland2020ArtificialIntelligence}, koje su metode, tehnike, programski alati ili aplikacije korištene u razradi rada te koje su pretpostavke dokazane, a koje opovrgnute. Sadržajno, ono što se u uvodu rada najavljuje i kasnije je obuhvaćeno u samom radu, moralo bi biti opisano u zaključnom dijelu kroz rezultate rada. 
+
+\lipsum[1-2]
+
+\makebackmatter
+% generira popis korištene literature, popis slika (ako je primjenjivo), popis tablica (ako je primjenjivo) i popis isječaka koda (ako je primjenjivo)
+
+\appendices % ako nije potrebno, obrisati ili zakomentirati
+
+\chapter{Prilog 1} % ako nije potrebno, obrisati ili zakomentirati
+
+\chapter{Prilog 2} % ako nije potrebno, obrisati ili zakomentirati
+
+\end{document}
