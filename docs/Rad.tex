@@ -103,6 +103,7 @@ U ovom poglavlju treba opisati koje će metode i tehnike biti korištene pri raz
 
 \chapter{Razrada teme}
 
+\cite{fortinet-digital-certificates}
 izvor: [1] https://www.fortinet.com/resources/cyberglossary/digital-certificates
 [12] https://dl.acm.org/doi/pdf/10.1145/357744.357892
 
@@ -128,6 +129,7 @@ Ovakve liste pružaju laku provjeru valjanosti, ali može biti problem njihova v
 Liste se nalaze u sustavu za opoziv certifikata odnosno CRS (engl. certificate revocation system) koji sadrže evidenciju pozitivnih i negativnih lista.
 Kako bi liste bile ažurirane i točne tijela za izdavanje certifikata šalju najnovije informacije o certifikatima.[12]
 
+\cite{ibm-cryptography}
 izvor: [2] https://www.ibm.com/think/topics/cryptography
 
 \chapter{Kriptografija}
@@ -155,6 +157,7 @@ Ovakav način kriptiranja/dekriptiranja osigurava da privatnom ključu (koji je 
 Isto tako javni ključ se može dijeliti preko nesigurnih kanala komunikacije što olakšava primjenu.
 Asimetrična kriptografija pruža sigurnost i robusnost, ali zahtjeva puno više resursa i vremena od simetrične kriptografije.
 
+\cite{keyfactor-pki}
 izvor: [3] https://www.keyfactor.com/education-center/what-is-pki/
 
 \chapter{Infrastruktura javnih ključeva}
@@ -184,6 +187,7 @@ Zlonamjerno korištenje uređaja koji su ugrađeni u automobile ili medicinsku o
 Kako bi se veze prema takvim uređajima zaštitile PKI izdaje certifikate uređajima te softveru s kojima uređaji komuniciraju.
 Uvođenje PKI može biti izazovno no sigurnost koju donosi korištenje digitalnih certifikata je najvažnija.
 
+\cite{dogtagpki}
 izvor: [4] https://www.dogtagpki.org/
 
 \section{Dogtag Certificate System}
@@ -199,6 +203,7 @@ Dogtag je skup tehnologija, a neke od ključnih značajki sustava su:
 -upravljanje životnim ciklusom pametne kartice
 -opsežna dokumentacije te snažna zajednica korisnika
 
+\cite{dogtagpki-architecture}
 izvor: [5] https://github.com/dogtagpki/pki/wiki/Architecture
 
 \subsection{Arhitektura}
@@ -220,6 +225,7 @@ JSS (engl. network security services for Java) pruža sučelje za sigurnosne ope
 JSS je izrađen s JNI (engl. Java native interface) koji omogućava binarnu kompatibilnost između različitih JVM-a (engl. Java virtual machine).
 Ovakav dizajn omogućuje izradu jednom, a pokretanje više puta na različitim platformama.
 
+\cite{hashicorp-vault-what-is}
 izvor: [6] https://developer.hashicorp.com/vault/docs/what-is-vault
 
 \section{HashiCorp Vault }
@@ -254,6 +260,7 @@ Ova inačica pruža brži i jednostavniji pristup, a korištenje odnosno komunik
 Takav pristup omogućuje smanjenje operativnih troškova te uklanja brige oko nadogradnji i sigurnosnih kopija.
 Jednostavnost, pouzdanost i lakša kontrola kod ovakvog pristupa omogućuje organizaciji ili tvrtki veći fokus na ostale poslove.
 
+\cite{hashicorp-vault-use-cases}
 izvor: [7] https://developer.hashicorp.com/vault/docs/use-cases
 
 \subsection{Korištenje Vault-a}
@@ -275,6 +282,7 @@ Koristi se ACL sustav koji povezuje identitet među različitim pružateljima us
 
 Vault nudi svoj sustav za upravljanje ključevima koji brine o distribuciji i životnom ciklusu ključeva, a korisnicima usluge omogućuje centralizirani pristup i standardne kriptografske mogućnosti koji omogućavaju drugi pružatelji usluge upravljanja ključevima.
 
+\cite{hashicorp-vault-pki-engine}
 izvor: [8] https://developer.hashicorp.com/vault/tutorials/pki/pki-engine?variants=vault-deploy%3Aselfhosted
 
 \subsection{CA i Vault}
@@ -284,6 +292,7 @@ Vault PKI [8] može dinamički izraditi X.509 certifikat na zahtjev, a izrada ce
 Kako bi se koristio Vault PKI potrebno je zadovoljiti neke preduvjete, a to su: instaliran Vault, API i CLI koji će proslijediti JSON ispis, web UI alat OpenSSL.
 Isto tako na sustavu domaćinu potrebno je dodijeli određena CRUD prava na definiranim putanjama poput "sys/mounts/", "sys/mounts" i "pki".
 
+\cite{techtarget-x509-certificate}
 izvor: [9] https://www.techtarget.com/searchsecurity/definition/X509-certificate
 
 \chapter{X.509 certifikat}
@@ -301,7 +310,9 @@ Do certifikata se dolazi na način da korisnik pošalje zahtjev za izdavanje cer
 Izrađen X.509 certifikat se može koristi kod digitalnih identiteta, TLS/SSL, sigurnog web pretraživanja, digitalnih potpisa, SSH, e-mail certifikata i sl.
 Može se primjetiti da mu je primjena široka, a pruža zaštitu od potencijalnih prijetnji koje nastaju od zlonamjernih trećih strana koje se lažno predstavljaju.
 
+\cite{cloudflare-http}
 izvor: [10] https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/
+\cite{cloudflare-https}
 izvor: [11] https://www.cloudflare.com/learning/ssl/what-is-https/
 
 \chapter{HTTP i HTTPS}
