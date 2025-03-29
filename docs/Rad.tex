@@ -104,6 +104,211 @@ U ovom poglavlju treba opisati koje će metode i tehnike biti korištene pri raz
 
 Ovo je glavni dio rada u kojem treba razraditi temu, pojasniti istraživanja, prikazati rezultate i slično. Poželjno je na početku poglavlja dati kratki opis strukture poglavlja, kako bi čitatelj/čitateljica rada mogao/mogla lakše pratiti složenu cjelinu.
 
+izvor: [1] https://www.fortinet.com/resources/cyberglossary/digital-certificates
+		[12] https://dl.acm.org/doi/pdf/10.1145/357744.357892 
+DIGITALNI CERTIFIKATI
+Digitalni certifikat [1] predstavlja datoteku pomoću koje je omogućena autentifikacija za razne uređaje korištenjem kriptografije ili sustava javnih ključeva.
+Glavan uloga digitalnih certifikata je da omoguće mrežni pristup samo pouzdanim uređajima.
+Digitalni certifikat je našao veliku primjenu kod dokazivanja web stranice prema web pretraživaču.
+Sadrži identifikacijske informacije te IP adresu ili serijski broj uređaja. 
+Digitalni certifikat također sadrži kopiju javnog ključa koji je izdan od strane izdavača certifikate te ona služi kod potvrde valjanosti certifikata.
+
+Tijela za izdavanje certifikata (engl. certificate authorities - CA) se brinu o valjanosti postojećih te izdavanju novih digitalnih certifikata. 
+Digitalni certifikati su jedan od načina primjene kibernetičke sigurnosti. 
+Digitalni certifikati pružaju: sigurnost, skalabilnost, autentičnost, pouzdanost i javno povjerenje.
+Nekada dolazi do miješanja pojmova digitalnih certifikata i digitalnih potpisa.
+Digitalni potpis za razliku od certifikata osigurava integritet i autentičnost dokumenta ili e-pošte pomoću kriptografskog ključa kreiranog od vlasnika dokumenta dok certifikat potvrđuje identitet. 
+
+Povlačenje odnosno opoziv valjanosti certifikata se može provesti na više načina: online ili offline provjera, pomoću liste odobrenih i zabranjenih, pomoću vođenje evidencije i pomoću distribucije informacije.
+Razlozi za opoziv mogu biti razni, a neki od najčešćih razloga su: kompromitiran ključ, promjena informacija u certifikatu, zamjena certifikata, nepotreban certifikat. 
+Opoziv se može provesti i zbog drugih razloga poput probijanja algoritma šifriranja, a svaki taj razlog se obično navodi kao informacija uz certifikat koji je opozvan.
+Postoje liste opoziva certifikata odnosno CRL (engl. certificate revocation lists) koje sadrže ključne informacije o opozivanim certifikatima.
+Ovakve liste pružaju laku provjeru valjanosti, ali može biti problem njihova veličina jer je današnji broj digitalnih certifikata velik.
+Liste se nalaze u sustavu za opoziv certifikata odnosno CRS (engl. certificate revocation system) koji sadrže evidenciju pozitivnih i negativnih lista.
+Kako bi liste bile ažurirane i točne tijela za izdavanje certifikata šalju najnovije informacije o certifikatima.[12]   
+
+izvor: [2] https://www.ibm.com/think/topics/cryptography
+KRIPTOGRAFIJA
+Kriptografija [2] je sposobnost korištenja algoritama za zaštitu poruka od neovlaštenog čitanja. 
+Poruka koja se prenosi od kreatora poruke prema primatelju za treću stranu mora biti nerazumljiva.
+Ovakva nečitljiva poruka (engl. ciphertext) se može pročitati jedino korištenjem ključa te algoritma koji se koristio tijekom kriptiranja, a izlaz je čitljiv tekst (engl. plain text).
+Kriptografija u današnje doba osigurava 4 osnovna principa: integritet, neporecivost, povjerljivost i autentifikacju.
+Kriptografija i kriptografski algoritmi osiguravaju svu sigurnost i privatnost informacija koje se koriste kroz informatičke sustave. 
+Osnovna područja u kojem se primjenjuje: upravljanje lozinkama, kriptovalute, sigurno web pretraživanje, elektronički potpis, autentifikacija te sigurna komunikacija.
+Postoje dvije osnovne vrste kriptografije, a to su: simetrična i asimetrična kriptografija. 
+
+*SIMETRIČNA KRIPTOGRAFIJA*
+Simetrična kriptografija koristi jedan ključ za enkripciju i dekripciju, a to znači da pošiljatelj i primatelj imaju jednak ključ kod sebe.
+Simetrična kriptografija je brza, efikasna te osigurava povjerljivost, no problem može biti čuvanje ključa kojim se radi enkripcija i dekripcija.
+Najveću primjenu pronalazi kod šifriranja velike količine podataka.
+
+*ASIMETRIČNA KRIPTOGRAFIJA*
+Za razliku od simetrične, asimetrična kriptografija koristi dva ključa privatni i javni. 
+Poruka se kriptira na način da se koristi privatni ključ pošiljatelja te javni ključ, a dekriptira se korištenjem privatnim ključem primatelja te javnim ključem.
+Ovakav način kriptiranja/dekriptiranja osigurava da privatnom ključu (koji je jedan od dva potrebna dijela) imaju pristup samo vlasnici ključa.
+Isto tako javni ključ se može dijeliti preko nesigurnih kanala komunikacije što olakšava primjenu.
+Asimetrična kriptografija pruža sigurnost i robusnost, ali zahtjeva puno više resursa i vremena od simetrične kriptografije. 
+
+izvor: [3] https://www.keyfactor.com/education-center/what-is-pki/
+INFRASTRUKUTRA JAVNIH KLJUČEVA
+PKI (engl. public key infrastructure) [3] odnosno infrastruktura javnih ključeva upravlja izdavanjem digitalnih certifikata.
+Sve velike organizacije kojima je stalo do sigurnosti koriste indirektno ili direktno PKI jer se on brine o valjanosti i sigurnosti ključeva potrebnih za enkripciju.
+PKI rješava izazove oke potvrde vlasnika ključa da je pošiljatelj neke poruke zaista onaj za kojeg se predstavlja. 
+Digitalni certifikati se često nazivaju PKI certifikati ili X.509 certifikati.
+PKI se prvi puta pojavljuje 1990-ih te se slabo primjenjuje jer je izrada certifikata skupa i dugo traje. 
+Digitalne certifikate su koristile tvrtke koje su npr. imale online trgovine i željele pružiti sigurnost prilikom kupovine.
+Prva veća potreba za PKI-om desila se 2000-ih pojavom udaljenog rada (van ureda). 
+Zaposlenici se spajaju preko VPN-a (engl. virtual private network) odnosno virtualne privatne mreže na mrežu tvrtke.
+Kako bi tvrtka bila posve sigurna u identitet osobe koja se spaja na njegovu mrežu ugrađuje digitalne certifikate na računala zaposlenika.
+Neki od njih kupuje certifikate, a neki implementiraju vlastite. 
+Velika količina certifikata zahtjeva dobro upravljanje njima kako ne bi istekli ili bili kompromitirani.
+Od 2010-ih do danas potreba za PKI-em i digitalnim certifikatima sve je veća.
+Jedan od uzroka sve veće potrebe je pojava miliona uređaja IoT (engl. internet of things) odnosno internet stvari.
+Takvi uređaji zahtijevaju spajanje na mrežu, a veza mora biti sigurna. 
+Upravljanje velikom količinom certifikata postaje sve napornije i tvrtke se često odlučuju na angažiranje pružatelje usluge za PKI.
+
+Neki od najčešće korištenih slučajeva PKI-a su: SSL/TLS certifikati za sigurno pretraživanje, digitalni potpis na softveru, upravljan pristup mreži te e-mail i podatkovna enkripcija.
+IoT uređaji su ranjivi zato jer često imaju jednostavna softverska rješenja koja su manje izazovna za hakere. 
+Kako bi se takvi uređaji zaštitili potrebno je ugraditi certifikate koji omogućuju sigurnu komunikaciju.
+Primjeri IoT uređaja koji moraju biti maksimalno sigurni su u auto industriji i medicinskoj industriji.
+Svaki napredni uređaj koji ima više točaka povezivanja na neku vrstu mreže može predstavljati opasnost od zlonamjernog korištenja.
+Zlonamjerno korištenje uređaja koji su ugrađeni u automobile ili medicinsku opremu mogu dovesti do katastrofalnih posljedica poput gubitka ljudskih života.
+Kako bi se veze prema takvim uređajima zaštitile PKI izdaje certifikate uređajima te softveru s kojima uređaji komuniciraju.
+Uvođenje PKI može biti izazovno no sigurnost koju donosi korištenje digitalnih certifikata je najvažnija.
+
+izvor: [4] https://www.dogtagpki.org/
+DOGTAG CERTIFICATE SYSTEM
+Dogtag sustav certifikata (engl. certificate system) [4] je tijelo za izdavanje certifikata otvorenog koda.
+Ovaj sustav je kompletan odnosno omogućuje upravljanje cijelim životnim ciklusom certifikata. 
+Sustav je besplatan za korištenje te donekle jednostavan za implementaciju.
+Dogtag je skup tehnologija, a neke od ključnih značajki sustava su:
+-izdavanje, opoziv i pronalaženje certifikata
+-generiranje i objavljivanje popisa opozvanih certifikata (CLR)
+-jednostavni upis certifikata (SCEP)
+-arhiviranje i omogućen oporavak ključa za šifriranje
+-upravljanje životnim ciklusom pametne kartice
+-opsežna dokumentacije te snažna zajednica korisnika
+
+izvor: [5] https://github.com/dogtagpki/pki/wiki/Architecture
+*ARHITEKTURA*
+Dogtag PKI sustav certifikata [5] pokreće se kao web aplikacija na Tomcat serveru.
+Ovakva struktura omogućuje korisnicima i klijentskim aplikacijama pristup putem različitih sučelja.
+Zajednički okvir napisan u Javi osigurava upravljanje, bilježenje, autentifikaciju, kontrolu pristupa, samotestiranje i kreiranje obavijesti.
+Kao bazu podataka sustav koristi 389 Directory Server za pohranu svih ključnih informacija. 
+Sustav s internom LDAP bazom komunicira na siguran način pomoću SSL protokola.	
+	**NSS**
+NSS (engl. network security services) odnosno usluge mrežne sigurnosti su skup biblioteka koje omogućuju više platformni razvoj aplikacija sa sigurnosni omogućenom komunikacijom.
+Aplikacije napravljene na ovakav način omogućuju korištenje SSL protokola za autentifikaciju, otkrivanje neovlaštenih izmjena i šifriranja te PKCS#11 za sučelje kriptografskih tokena.
+Red Hat koristi NSS u širokom spektru proizvoda, uključujući sustav certifikata. 
+	**Standardno PKCS#11 sučelje**
+PKCS#11 (engl. public-key cryptography standard) je standard koji specificira API koji se koristi za komunikaciju sa uređajima koji sadrže kriptografske informacije i izvode kriptografske operacije.
+Na ovakav način omogućeno je korištenje na različitom softveru i hardveru.
+	**JSS i sloj JNI**
+JSS (engl. network security services for Java) pruža sučelje za sigurnosne operacije koje izvodi NSS.
+JSS je izrađen s JNI (engl. Java native interface) koji omogućava binarnu kompatibilnost između različitih JVM-a (engl. Java virtual machine).
+Ovakav dizajn omogućuje izradu jednom, a pokretanje više puta na različitim platformama. 
+
+izvor: [6] https://developer.hashicorp.com/vault/docs/what-is-vault
+HASHCORP VALUT
+HashiCorp Vault [6] je temeljen na sigurnosti identiteta i sustav je koji upravlja enkripcijom. 
+Obavlja usluge enkripcije koje su osigurane autentifikacijom i autorizacijskim metodama kakao bi se osigurala sigurnost, onemogućen pristup trećim stranama te praćenje izvršenih radnji.
+Vault pruža sučelje za bilo koju vrstu tajne poput tokena, zaporke, API ključa itd. osiguravajući strogu kontrolu pristupa te bilježenje izvršenih radnji.
+Vault provjera klijente odnosno korisnike koji žele pristupit tajnama te im sukladno dodijeljenim pravima omogućuje pristup.
+
+*KAKO RADI VAULT?*
+Vault primarno radi s tokenima koji su povezani s putanjama prema servisu, a token ordređuje koje radnje i prava pristupa klijent posjeduje. 
+https://developer.hashicorp.com/vault/docs/what-is-vault
+Slika prikazuje na koji način Vault radi.
+Cijeli proces započinje autentifikacijom, zatim Vault provjerava identitet klijenta uz pomoć neke pouzdane treće strane.
+Slijed proces autorizacije i usklađivanja prava na strani klijenta na način da mu se dopušta pristup tajnim informacijama prema unaprijed definiranim pravilima.
+
+*ZNAČAJKE VAULTA*
+Vault je dizajniran na način da centralizira i s jednog mjesta upravlja svim vjerodajnicama koje neka tvrtka ima obično razbacano na više mjesta.
+Vault osigurava da su svi korisnici, aplikacije i sustavi prošli autentifikaciju te da su autorizirani za pristup vjerodajnicama.
+Također osigurava da je snimljena sva povijest radnji klijenta.
+Kako bi se zaštitile informacije Vault ih prije spremanja enkriptira te takve sprema u pohranu, na ovaj način podiže se sigurnost pohrane informacije.
+Omogućuje dinamičko dodjeljivanje pristupa nekim tajnim informacijama, može po potrebi dati pristup nekoj tajni te nakon nekog vremena povući to pravo pristupa.
+Omogućuje enkripciju i dekripciju podataka koje prenosi bez spremanja u neku pohranu. 
+Vault ima ugrađeni sustav povlačenja tajni, ako se desi neki upad u sustav na ovaj način se može zaključati sustav te spriječiti uništenje sustava. 
+
+*HASHICORP CLOUD PLATFORM*
+Postoji inačica Vaulta koja je hostana odnosno koja je instalirana na nekom udaljenom poslužitelju.
+Ova inačica pruža brži i jednostavniji pristup, a korištenje odnosno komunikacija prema Vaultu ostaje ista kao i kod samostalne implementacije.
+Takav pristup omogućuje smanjenje operativnih troškova te uklanja brige oko nadogradnji i sigurnosnih kopija.
+Jednostavnost, pouzdanost i lakša kontrola kod ovakvog pristupa omogućuje organizaciji ili tvrtki veći fokus na ostale poslove.
+
+izvor: [7] https://developer.hashicorp.com/vault/docs/use-cases
+*KORIŠENJE VAULTA*
+Kao što je i prethodno navedeno Vault se bavi upravljanjem osjetljivim i tajnim informacijama koje organizacija posjeduje.
+U nastavku će se obraditi na koje načine se koristi Vault.
+
+Posjedovanje vjerodajnica s dugim rokom za organizaciju predstavlja prijetnju.
+Vault omogućuje stvaranje i upravljanje vjerodajnicama koje će biti korištene kratko ili s nekim vremenskim ograničenjem uz automatsko povlačenje ili mijenjanje prava koje donosi vjerodajnica.
+Vjerodajnica mogu biti dugovječne i statičke te se kao takve čuvaju zaštićene i spremljene te se koriste samo na zahtjev klijenta.
+Isto tako vjerodajnice mogu biti dinamičke odnosno one nastaju kada klijent ima potrebu za njima. 
+Vault može upravljati vremenskim ograničenjima te brisanjem samih vjerodajnica nakon isteka nekog roka.
+
+Vault nudi uslugu enkripcije kao usluge kako se organizacija ne bi morala zamarati s održavanjem ključeva i samom kriptografijom.
+Vault može enkriptirati ili dekriptirati podatke pohranjene bilo gdje te se u potpunosti brine da su podaci zaštićeni.
+
+Vault također nudi uslugu upravljanja pristupom na temelju identiteta korisnika. 
+Koristi se ACL sustav koji povezuje identitet među različitim pružateljima usluga te kao posrednik brine o pristupu sustavima i tajnama.
+
+Vault nudi svoj sustav za upravljanje ključevima koji brine o distribuciji i životnom ciklusu ključeva, a korisnicima usluge omogućuje centralizirani pristup i standardne kriptografske mogućnosti koji omogućavaju drugi pružatelji usluge upravljanja ključevima.
+
+izvor: [8] https://developer.hashicorp.com/vault/tutorials/pki/pki-engine?variants=vault-deploy%3Aselfhosted
+*CA I VAULT*
+Vault PKI [8] može dinamički izraditi X.509 certifikat na zahtjev, a izrada certifikata je brza i sigurna.
+!!!!!!!POTREBNO NADOPISAT NISAM SIG JEL SAM DOBRO RAZUMIO PROVJERITE IDUCE DVIJE RECENICE!!!!!!!!!!!!
+Kako bi se koristio Vault PKI potrebno je zadovoljiti neke preduvjete, a to su: instaliran Vault, API i CLI koji će proslijediti JSON ispis, web UI alat OpenSSL.
+Isto tako na sustavu domaćinu potrebno je dodijeli određena CRUD prava na definiranim putanjama poput "sys/mounts/", "sys/mounts" i "pki".
+
+izvor: [9] https://www.techtarget.com/searchsecurity/definition/X509-certificate
+X.509 CERTIFIKAT
+X.509 certifikat [9] je digitalni certifikat koji se temelji na X.509 PKI standardu kojim se provjerava identitet nekog korisnika ili sustava. 
+PKI omogućuje sigurnu komunikaciju između korisnika i nekog servisa.
+X.509 certifikat je definiran od strane International Telecommunication Union's Telecommunication Standardization Sector (ITU-T), a trenutna verzija 9 je definirana u listopadu 2019. godine.
+Verzijama se zapravo definira šta sve sadrži te na koji način certifikat sprema informacije.
+Certifikat X.509 sadrži informacije: o verziji, serijskom broju, algoritmu koji se koristio tijekom potpisa, imenu izdavatelja, trajanju certifikata, imenu korisnika, informacije o javnom ključu i opcionalno neko proširenje.
+
+*PRIMJENA X.509 CERTIFIKATA*
+Primjena X.509 certifikata koji sadrži javni ključ i identitet je široka te se koristi kada je potrebna sigurnost u komunikaciji ili kao dokaz vjerodostojnosti.
+Do certifikata se dolazi na način da korisnik pošalje zahtjev za izdavanje certifikata, web sever proslijedi zahtjev prema CA te CA izda certifikat. 
+Izrađen X.509 certifikat se može koristi kod digitalnih identiteta, TLS/SSL, sigurnog web pretraživanja, digitalnih potpisa, SSH, e-mail certifikata i sl. 
+Može se primjetiti da mu je primjena široka, a pruža zaštitu od potencijalnih prijetnji koje nastaju od zlonamjernih trećih strana koje se lažno predstavljaju.
+
+izvor: [10] https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/
+izvor: [11] https://www.cloudflare.com/learning/ssl/what-is-https/
+HTTP I HTTPS
+HTTP (engl. hypertext transfer protocol) [10] je protokol aplikacijskog sloja koji prikazuje podatke na web mjestu razumljive ljudima. 
+HTTP sa serverom koji sadrži informacije komuncira preko HTTP zahtjeva i porta 80. 
+HTTP zahtjevi koje postavlja prema serveru su: CONNECT, GET, POST, PUT, DELETE, HEAD, OPTIONS.
+Uobičajan HTTP zahtjev sadrži: HTTP verziju, URL, HTTP metodu, HTTP zaglavlje zahtjeva i opcionalno HTTP tijelo. 
+Server prema klijentu odgovara pomoću HTTP odgovora koji sadrži: HTTP kod statusa, HTTP zaglavlje odgovora i opcionalno HTTP tijelo.
+Najpoznatiji je HTTP kod statusa koji se sastoji od 3 znamenke, a označavaju status odgovora na zahtjev poslan prema serveru.
+Općenito prvi broj u kodu statusa označuje grupu kojoj kod pripada, to su: 1xx informacija, 2xx uspjeh, 3xx preusmjeravanje, 4xx error klijenta, 5xx error servera. 
+
+HTTPS (engl. hypertext transfer protocol secure) [11] je sigurna verzija HTTP-a odnosno koristi kriptirani promet prilikom prijenosa informacija.
+Bilo koja web stranica ili aplikacija koja isporučuje ili prima osjetljive informacije trebala bi imati ugrađen HTTPS protokol.
+Bez ugrađenog HTTPS protokola najjednostavnijim snimanjem prometa koji se dešava između klijenta i servera može se doći do svih informacijama u čistom tekstu.
+Kako bi se spriječilo takvo neometano čitanje HTTPS koristi protokol TLS (engl. transport layer security) ili takozvani SSL (engl. secure sockets layer) koji asimetričnom kriptografijom šifrira podatke.
+U ovom slučaju ako dođe do snimanja prometa on je nerazumljiv i nečitljiv.
+HTTPS za komunikaciju koristi port 443, a zahtjevi su isti kao i kod HTTP-a.
+Za razliku od HTTP-a, HTTPS prije komunikacije s nekim servisom koristi TLS/SSL rukovanje (engl. handshake) kod kojeg se koristi TLS/SSL certifikat za potvrdu identiteta.
+
+
+UVOD
+Sigurnost komunikacija na internetu je važna jer je sve više osjetljivih informacija koje se svakog dana prenose kroz mrežu.
+Digitalni certifikati imaju značajnu ulogu kod podizanja te sigurnosti, korištenjem kod HTTPS komunikacije podiže se razina sigurnosti razmjene informacija.
+Implementacijom vlastitog sustava za upravljanje digitalnim certifikatima postiže se neovisnost i potpuna kontrola nad izdavanjem certifikata.
+Međutim upravljanje životnim ciklusom certifikata može biti izazovna ako se radi o velikoj količini certifikata.
+
+Kroz praktični dio rada korišten je HashiCorp Vault. 
+Primarno je namijenjen čuvanju tajni, ali ima mogućnost izdavanja digitalni certifikata.
+Kroz teorijski dio također je predstavljen Dogtag sustav certifikata za dugoročno i preciznije upravljanje certifikatima. 
+
+Cilj projekta je izrada sustava za upravljanje digitalnim certifikatima kod HTTPS komunikacije. 
+Projekt uključuje implementaciju alata za izdavanje, revociranje i upravljanje certifikatima te implementaciju protokola za provjeru valjanosti certifikata.
 
 \chapter{Zaključak}
 
