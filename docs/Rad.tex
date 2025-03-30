@@ -99,13 +99,9 @@ U ovom poglavlju treba opisati koje će metode i tehnike biti korištene pri raz
 
 \chapter{Razrada teme}
 
-\cite{fortinet-digital-certificates}
-izvor: [1] https://www.fortinet.com/resources/cyberglossary/digital-certificates
-[12] https://dl.acm.org/doi/pdf/10.1145/357744.357892
-
 \chapter{Digitalni certifikati}
 
-Digitalni certifikat [1] predstavlja datoteku pomoću koje je omogućena autentifikacija za razne uređaje korištenjem kriptografije ili sustava javnih ključeva.
+Digitalni certifikat predstavlja datoteku pomoću koje je omogućena autentifikacija za razne uređaje korištenjem kriptografije ili sustava javnih ključeva \cite{fortinet-digital-certificates}.
 Glavan uloga digitalnih certifikata je da omoguće mrežni pristup samo pouzdanim uređajima.
 Digitalni certifikat je našao veliku primjenu kod dokazivanja web stranice prema web pretraživaču.
 Sadrži identifikacijske informacije te IP adresu ili serijski broj uređaja.
@@ -125,12 +121,9 @@ Ovakve liste pružaju laku provjeru valjanosti, ali može biti problem njihova v
 Liste se nalaze u sustavu za opoziv certifikata odnosno CRS (engl. certificate revocation system) koji sadrže evidenciju pozitivnih i negativnih lista.
 Kako bi liste bile ažurirane i točne tijela za izdavanje certifikata šalju najnovije informacije o certifikatima.[12]
 
-\cite{ibm-cryptography}
-izvor: [2] https://www.ibm.com/think/topics/cryptography
-
 \chapter{Kriptografija}
 
-Kriptografija [2] je sposobnost korištenja algoritama za zaštitu poruka od neovlaštenog čitanja.
+Kriptografija je sposobnost korištenja algoritama za zaštitu poruka od neovlaštenog čitanja \cite{ibm-cryptography}.
 Poruka koja se prenosi od kreatora poruke prema primatelju za treću stranu mora biti nerazumljiva.
 Ovakva nečitljiva poruka (engl. ciphertext) se može pročitati jedino korištenjem ključa te algoritma koji se koristio tijekom kriptiranja, a izlaz je čitljiv tekst (engl. plain text).
 Kriptografija u današnje doba osigurava 4 osnovna principa: integritet, neporecivost, povjerljivost i autentifikacju.
@@ -153,12 +146,10 @@ Ovakav način kriptiranja/dekriptiranja osigurava da privatnom ključu (koji je 
 Isto tako javni ključ se može dijeliti preko nesigurnih kanala komunikacije što olakšava primjenu.
 Asimetrična kriptografija pruža sigurnost i robusnost, ali zahtjeva puno više resursa i vremena od simetrične kriptografije.
 
-\cite{keyfactor-pki}
-izvor: [3] https://www.keyfactor.com/education-center/what-is-pki/
-
 \chapter{Infrastruktura javnih ključeva}
 
-PKI (engl. public key infrastructure) [3] odnosno infrastruktura javnih ključeva upravlja izdavanjem digitalnih certifikata.
+PKI (engl. public key infrastructure) odnosno infrastruktura javnih ključeva upravlja izdavanjem digitalnih certifikata
+\cite{keyfactor-pki}.
 Sve velike organizacije kojima je stalo do sigurnosti koriste indirektno ili direktno PKI jer se on brine o valjanosti i sigurnosti ključeva potrebnih za enkripciju.
 PKI rješava izazove oke potvrde vlasnika ključa da je pošiljatelj neke poruke zaista onaj za kojeg se predstavlja.
 Digitalni certifikati se često nazivaju PKI certifikati ili X.509 certifikati.
@@ -183,28 +174,27 @@ Zlonamjerno korištenje uređaja koji su ugrađeni u automobile ili medicinsku o
 Kako bi se veze prema takvim uređajima zaštitile PKI izdaje certifikate uređajima te softveru s kojima uređaji komuniciraju.
 Uvođenje PKI može biti izazovno no sigurnost koju donosi korištenje digitalnih certifikata je najvažnija.
 
-\cite{dogtagpki}
-izvor: [4] https://www.dogtagpki.org/
 
 \section{Dogtag Certificate System}
 
-Dogtag sustav certifikata (engl. certificate system) [4] je tijelo za izdavanje certifikata otvorenog koda.
+Dogtag sustav certifikata (engl. certificate system) \cite{dogtagpki} je tijelo za izdavanje certifikata otvorenog koda.
 Ovaj sustav je kompletan odnosno omogućuje upravljanje cijelim životnim ciklusom certifikata.
 Sustav je besplatan za korištenje te donekle jednostavan za implementaciju.
 Dogtag je skup tehnologija, a neke od ključnih značajki sustava su:
--izdavanje, opoziv i pronalaženje certifikata
--generiranje i objavljivanje popisa opozvanih certifikata (CLR)
--jednostavni upis certifikata (SCEP)
--arhiviranje i omogućen oporavak ključa za šifriranje
--upravljanje životnim ciklusom pametne kartice
--opsežna dokumentacije te snažna zajednica korisnika
 
-\cite{dogtagpki-architecture}
-izvor: [5] https://github.com/dogtagpki/pki/wiki/Architecture
+\begin{itemize}
+    \item izdavanje, opoziv i pronalaženje certifikata,
+    \item generiranje i objavljivanje popisa opozvanih certifikata (CLR),
+    \item jednostavni upis certifikata (SCEP),
+    \item arhiviranje i omogućen oporavak ključa za šifriranje,
+    \item upravljanje životnim ciklusom pametne kartice,
+    \item opsežna dokumentacije te snažna zajednica korisnika.
+\end{itemize}
+
 
 \subsection{Arhitektura}
 
-Dogtag PKI sustav certifikata [5] pokreće se kao web aplikacija na Tomcat serveru.
+Dogtag PKI sustav certifikata pokreće se kao web aplikacija na Tomcat serveru \cite{dogtagpki-architecture}.
 Ovakva struktura omogućuje korisnicima i klijentskim aplikacijama pristup putem različitih sučelja.
 Zajednički okvir napisan u Javi osigurava upravljanje, bilježenje, autentifikaciju, kontrolu pristupa, samotestiranje i kreiranje obavijesti.
 Kao bazu podataka sustav koristi 389 Directory Server za pohranu svih ključnih informacija.
@@ -221,12 +211,9 @@ JSS (engl. network security services for Java) pruža sučelje za sigurnosne ope
 JSS je izrađen s JNI (engl. Java native interface) koji omogućava binarnu kompatibilnost između različitih JVM-a (engl. Java virtual machine).
 Ovakav dizajn omogućuje izradu jednom, a pokretanje više puta na različitim platformama.
 
-\cite{hashicorp-vault-what-is}
-izvor: [6] https://developer.hashicorp.com/vault/docs/what-is-vault
+\section{HashiCorp Vault}
 
-\section{HashiCorp Vault }
-
-HashiCorp Vault [6] je temeljen na sigurnosti identiteta i sustav je koji upravlja enkripcijom.
+HashiCorp Vault je temeljen na sigurnosti identiteta i sustav je koji upravlja enkripcijom \cite{hashicorp-vault-what-is}.
 Obavlja usluge enkripcije koje su osigurane autentifikacijom i autorizacijskim metodama kakao bi se osigurala sigurnost, onemogućen pristup trećim stranama te praćenje izvršenih radnji.
 Vault pruža sučelje za bilo koju vrstu tajne poput tokena, zaporke, API ključa itd. osiguravajući strogu kontrolu pristupa te bilježenje izvršenih radnji.
 Vault provjera klijente odnosno korisnike koji žele pristupit tajnama te im sukladno dodijeljenim pravima omogućuje pristup.
@@ -234,7 +221,13 @@ Vault provjera klijente odnosno korisnike koji žele pristupit tajnama te im suk
 \subsection{Kako radi Vault?}
 
 Vault primarno radi s tokenima koji su povezani s putanjama prema servisu, a token ordređuje koje radnje i prava pristupa klijent posjeduje.
-https://developer.hashicorp.com/vault/docs/what-is-vault
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\textwidth]{assets/assets.png}
+    \caption{HashiCorp Vault Arhitektura \cite{hashicorp-vault-what-is}}
+\end{figure}
+
 Slika prikazuje na koji način Vault radi.
 Cijeli proces započinje autentifikacijom, zatim Vault provjerava identitet klijenta uz pomoć neke pouzdane treće strane.
 Slijed proces autorizacije i usklađivanja prava na strani klijenta na način da mu se dopušta pristup tajnim informacijama prema unaprijed definiranim pravilima.
@@ -256,8 +249,6 @@ Ova inačica pruža brži i jednostavniji pristup, a korištenje odnosno komunik
 Takav pristup omogućuje smanjenje operativnih troškova te uklanja brige oko nadogradnji i sigurnosnih kopija.
 Jednostavnost, pouzdanost i lakša kontrola kod ovakvog pristupa omogućuje organizaciji ili tvrtki veći fokus na ostale poslove.
 
-\cite{hashicorp-vault-use-cases}
-izvor: [7] https://developer.hashicorp.com/vault/docs/use-cases
 
 \subsection{Korištenje Vault-a}
 
@@ -276,28 +267,24 @@ Vault može enkriptirati ili dekriptirati podatke pohranjene bilo gdje te se u p
 Vault također nudi uslugu upravljanja pristupom na temelju identiteta korisnika.
 Koristi se ACL sustav koji povezuje identitet među različitim pružateljima usluga te kao posrednik brine o pristupu sustavima i tajnama.
 
-Vault nudi svoj sustav za upravljanje ključevima koji brine o distribuciji i životnom ciklusu ključeva, a korisnicima usluge omogućuje centralizirani pristup i standardne kriptografske mogućnosti koji omogućavaju drugi pružatelji usluge upravljanja ključevima.
-
-\cite{hashicorp-vault-pki-engine}
-izvor: [8] https://developer.hashicorp.com/vault/tutorials/pki/pki-engine?variants=vault-deploy%3Aselfhosted
+Vault nudi svoj sustav za upravljanje ključevima koji brine o distribuciji i životnom ciklusu ključeva, a korisnicima usluge omogućuje centralizirani pristup i standardne kriptografske mogućnosti koji omogućavaju drugi pružatelji usluge upravljanja ključevima. \cite{hashicorp-vault-use-cases}
 
 \subsection{CA i Vault}
 
-Vault PKI [8] može dinamički izraditi X.509 certifikat na zahtjev, a izrada certifikata je brza i sigurna.
+Vault PKI može dinamički izraditi X.509 certifikat na zahtjev, a izrada certifikata je brza i sigurna.
 !!!!!!!POTREBNO NADOPISAT NISAM SIG JEL SAM DOBRO RAZUMIO PROVJERITE IDUCE DVIJE RECENICE!!!!!!!!!!!!
 Kako bi se koristio Vault PKI potrebno je zadovoljiti neke preduvjete, a to su: instaliran Vault, API i CLI koji će proslijediti JSON ispis, web UI alat OpenSSL.
 Isto tako na sustavu domaćinu potrebno je dodijeli određena CRUD prava na definiranim putanjama poput "sys/mounts/", "sys/mounts" i "pki".
-
-\cite{techtarget-x509-certificate}
-izvor: [9] https://www.techtarget.com/searchsecurity/definition/X509-certificate
+\cite{hashicorp-vault-pki-engine}
 
 \chapter{X.509 certifikat}
 
-X.509 certifikat [9] je digitalni certifikat koji se temelji na X.509 PKI standardu kojim se provjerava identitet nekog korisnika ili sustava.
+X.509 certifikat je digitalni certifikat koji se temelji na X.509 PKI standardu kojim se provjerava identitet nekog korisnika ili sustava.
 PKI omogućuje sigurnu komunikaciju između korisnika i nekog servisa.
 X.509 certifikat je definiran od strane International Telecommunication Union's Telecommunication Standardization Sector (ITU-T), a trenutna verzija 9 je definirana u listopadu 2019. godine.
 Verzijama se zapravo definira šta sve sadrži te na koji način certifikat sprema informacije.
 Certifikat X.509 sadrži informacije: o verziji, serijskom broju, algoritmu koji se koristio tijekom potpisa, imenu izdavatelja, trajanju certifikata, imenu korisnika, informacije o javnom ključu i opcionalno neko proširenje.
+\cite{techtarget-x509-certificate}
 
 \section{Primjena X.509 certifikata}
 
@@ -305,29 +292,27 @@ Primjena X.509 certifikata koji sadrži javni ključ i identitet je široka te s
 Do certifikata se dolazi na način da korisnik pošalje zahtjev za izdavanje certifikata, web sever proslijedi zahtjev prema CA te CA izda certifikat.
 Izrađen X.509 certifikat se može koristi kod digitalnih identiteta, TLS/SSL, sigurnog web pretraživanja, digitalnih potpisa, SSH, e-mail certifikata i sl.
 Može se primjetiti da mu je primjena široka, a pruža zaštitu od potencijalnih prijetnji koje nastaju od zlonamjernih trećih strana koje se lažno predstavljaju.
-
-\cite{cloudflare-http}
-izvor: [10] https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/
-\cite{cloudflare-https}
-izvor: [11] https://www.cloudflare.com/learning/ssl/what-is-https/
+\cite{techtarget-x509-certificate}
 
 \chapter{HTTP i HTTPS}
 
-HTTP (engl. hypertext transfer protocol) [10] je protokol aplikacijskog sloja koji prikazuje podatke na web mjestu razumljive ljudima.
+HTTP (engl. hypertext transfer protocol) je protokol aplikacijskog sloja koji prikazuje podatke na web mjestu razumljive ljudima.
 HTTP sa serverom koji sadrži informacije komuncira preko HTTP zahtjeva i porta 80.
 HTTP zahtjevi koje postavlja prema serveru su: CONNECT, GET, POST, PUT, DELETE, HEAD, OPTIONS.
 Uobičajan HTTP zahtjev sadrži: HTTP verziju, URL, HTTP metodu, HTTP zaglavlje zahtjeva i opcionalno HTTP tijelo.
 Server prema klijentu odgovara pomoću HTTP odgovora koji sadrži: HTTP kod statusa, HTTP zaglavlje odgovora i opcionalno HTTP tijelo.
 Najpoznatiji je HTTP kod statusa koji se sastoji od 3 znamenke, a označavaju status odgovora na zahtjev poslan prema serveru.
 Općenito prvi broj u kodu statusa označuje grupu kojoj kod pripada, to su: 1xx informacija, 2xx uspjeh, 3xx preusmjeravanje, 4xx error klijenta, 5xx error servera.
+\cite{cloudflare-http}
 
-HTTPS (engl. hypertext transfer protocol secure) [11] je sigurna verzija HTTP-a odnosno koristi kriptirani promet prilikom prijenosa informacija.
+HTTPS (engl. hypertext transfer protocol secure) je sigurna verzija HTTP-a odnosno koristi kriptirani promet prilikom prijenosa informacija.
 Bilo koja web stranica ili aplikacija koja isporučuje ili prima osjetljive informacije trebala bi imati ugrađen HTTPS protokol.
 Bez ugrađenog HTTPS protokola najjednostavnijim snimanjem prometa koji se dešava između klijenta i servera može se doći do svih informacijama u čistom tekstu.
 Kako bi se spriječilo takvo neometano čitanje HTTPS koristi protokol TLS (engl. transport layer security) ili takozvani SSL (engl. secure sockets layer) koji asimetričnom kriptografijom šifrira podatke.
 U ovom slučaju ako dođe do snimanja prometa on je nerazumljiv i nečitljiv.
 HTTPS za komunikaciju koristi port 443, a zahtjevi su isti kao i kod HTTP-a.
 Za razliku od HTTP-a, HTTPS prije komunikacije s nekim servisom koristi TLS/SSL rukovanje (engl. handshake) kod kojeg se koristi TLS/SSL certifikat za potvrdu identiteta.
+\cite{cloudflare-https}
 
 \chapter{Zaključak}
 
