@@ -64,10 +64,17 @@
 % study programme; please enter "Erasmus" for incoming exchange students
 
 
-\sazetak{Opsega od 100 do 300 riječi. Sažetak upućuje na temu rada, ukratko se iznosi čime se rad bavi, teorijsko-metodološka polazišta, glavne teze i smjer rada te zaključci.}
+\sazetak{Digitalni certifikat je elektronički dokument koji služi za provjeru identiteta nekog uređaja, 
+poslužitelja ili korisnika na internetu koristeći kriptografiju i infrastrukturu javnih ključeva. 
+Certifikati se mogu koristiti u organizacijama da osiguraju da se samo pouzdani korisnici mogu 
+povezati na njihove mreže te potvrđuju identitet web stranice na web pregledniku. 
+Digitalne certifikate izdaju ovlaštene organizacije koje se nazivaju certifikacijsko tijelo (engl. Certificate Authority). 
+Nadalje, u radu će se implementirati sustav za upravljanje digitalnim certifikatima koristeći vlastito certifikacijsko tijelo. 
+Administrator sustava će moći izdati, revocirati i upravljati certifikatima. 
+Također, pokazat će se implementacija provjere valjanost certifikata web poslužitelja u web pregledniku.}
 % abstract of 100 to 300 words.
 
-\kljucneRijeci{riječ; riječ; ...riječ; Obuhvaća $7\pm2$ ključna pojma koji su glavni predmet rasprave u radu.}
+\kljucneRijeci{digitalni certifikat; X.509 certifikat; Certificate Revocation List; Public Key Infrastructure; Certificate Authority; HashiCorp Vault; HTTPS}
 % keywords including 7 +/- 2 syntagms
 
 \begin{document}
@@ -81,7 +88,7 @@
 
 \chapter{Uvod}
 
-Sigurnost komunikacija na internetu je važna jer je sve više osjetljivih informacija koje se svakog dana prenose kroz mrežu.
+Sigurnost komunikacija na internetu postaje sve važniji aspekt za uzeti u obzir zbog povećanja osjetljivih informacija koje su potrebne za rad u modernim informacijskim sustavima.
 Digitalni certifikati imaju značajnu ulogu kod podizanja te sigurnosti, korištenjem kod HTTPS komunikacije podiže se razina sigurnosti razmjene informacija.
 Implementacijom vlastitog sustava za upravljanje digitalnim certifikatima postiže se neovisnost i potpuna kontrola nad izdavanjem certifikata.
 Međutim upravljanje životnim ciklusom certifikata može biti izazovna ako se radi o velikoj količini certifikata.
@@ -93,11 +100,6 @@ Kroz teorijski dio također je predstavljen Dogtag sustav certifikata za dugoro�
 Cilj projekta je izrada sustava za upravljanje digitalnim certifikatima kod HTTPS komunikacije.
 Projekt uključuje implementaciju alata za izdavanje, revociranje i upravljanje certifikatima te implementaciju protokola za provjeru valjanosti certifikata.
 
-\chapter{Metode i tehnike rada}
-
-U ovom poglavlju treba opisati koje će metode i tehnike biti korištene pri razradi teme, kako su provedene istraživačke aktivnosti, koji su programski alati ili aplikacije korišteni.
-
-\chapter{Razrada teme}
 
 \chapter{Digitalni certifikati}
 
@@ -133,9 +135,7 @@ Postoje dvije osnovne vrste kriptografije, a to su: simetrična i asimetrična k
 
 \section{Simetrična kriptografija}
 
-Simetrična kriptografija koristi jedan ključ za enkripciju i dekripciju, a to znači da pošiljatelj i primatelj imaju jednak ključ kod sebe.
-Simetrična kriptografija je brza, efikasna te osigurava povjerljivost, no problem može biti čuvanje ključa kojim se radi enkripcija i dekripcija.
-Najveću primjenu pronalazi kod šifriranja velike količine podataka.
+Simetrična kriptografija koristi jedan ključ za enkripciju i dekripciju, a to znači da pošiljatelj i primatelj imaju jednak ključ kod sebe. Simetrična kriptografija je brza, efikasna te osigurava povjerljivost, no problem može biti čuvanje ključa kojim se radi enkripcija i dekripcija. Najveću primjenu pronalazi kod šifriranja velike količine podataka.
 
 
 \section{Asimetrična kriptografija}
@@ -145,6 +145,15 @@ Poruka se kriptira na način da se koristi privatni ključ pošiljatelja te javn
 Ovakav način kriptiranja/dekriptiranja osigurava da privatnom ključu (koji je jedan od dva potrebna dijela) imaju pristup samo vlasnici ključa.
 Isto tako javni ključ se može dijeliti preko nesigurnih kanala komunikacije što olakšava primjenu.
 Asimetrična kriptografija pruža sigurnost i robusnost, ali zahtjeva puno više resursa i vremena od simetrične kriptografije.
+U modernim kriptografskim sustavima često se koristi kombinacija simetričnih i asimetričnih algoritama kako bi se iskoristile prednosti oba pristupa. Simetrični ključ, koji se koristi za šifriranje podataka, najprije se enkriptira pomoću asimetričnog algoritma i sigurno se prenosi primatelju. Nakon toga, primatelj dešifrira simetrični ključ pomoću svog privatnog ključa i koristi ga za daljnju komunikaciju.
+
+\noindent Primjeri sustava koji koriste ovu metodu su:
+\begin{itemize}[noitemsep,topsep=0pt]
+    \item TLS (Transport Layer Security) - koristi RSA ili ECC za razmjenu ključeva i AES za šifriranje podataka.
+    \item PGP (Pretty Good Privacy) - koristi RSA za šifriranje sesijskog ključa, dok se stvarna enkripcija podataka vrši simetričnim algoritmom poput AES-a.
+    \item Signal protokol - koristi kombinaciju asimetrične kriptografije (Double Ratchet algoritam) i simetrične enkripcije za sigurno slanje poruka.
+\end{itemize}
+
 
 \chapter{Infrastruktura javnih ključeva}
 
@@ -174,6 +183,7 @@ Zlonamjerno korištenje uređaja koji su ugrađeni u automobile ili medicinsku o
 Kako bi se veze prema takvim uređajima zaštitile PKI izdaje certifikate uređajima te softveru s kojima uređaji komuniciraju.
 Uvođenje PKI može biti izazovno no sigurnost koju donosi korištenje digitalnih certifikata je najvažnija.
 
+\pagebreak
 
 \section{Dogtag Certificate System}
 
@@ -182,7 +192,7 @@ Ovaj sustav je kompletan odnosno omogućuje upravljanje cijelim životnim ciklus
 Sustav je besplatan za korištenje te donekle jednostavan za implementaciju.
 Dogtag je skup tehnologija, a neke od ključnih značajki sustava su:
 
-\begin{itemize}
+\begin{itemize}[noitemsep,topsep=0pt]
     \item izdavanje, opoziv i pronalaženje certifikata,
     \item generiranje i objavljivanje popisa opozvanih certifikata (CLR),
     \item jednostavni upis certifikata (SCEP),
@@ -199,18 +209,18 @@ Ovakva struktura omogućuje korisnicima i klijentskim aplikacijama pristup putem
 Zajednički okvir napisan u Javi osigurava upravljanje, bilježenje, autentifikaciju, kontrolu pristupa, samotestiranje i kreiranje obavijesti.
 Kao bazu podataka sustav koristi 389 Directory Server za pohranu svih ključnih informacija.
 Sustav s internom LDAP bazom komunicira na siguran način pomoću SSL protokola.
-**NSS**
+\subsection{NSS}
 NSS (engl. network security services) odnosno usluge mrežne sigurnosti su skup biblioteka koje omogućuju više platformni razvoj aplikacija sa sigurnosni omogućenom komunikacijom.
 Aplikacije napravljene na ovakav način omogućuju korištenje SSL protokola za autentifikaciju, otkrivanje neovlaštenih izmjena i šifriranja te PKCS\#11 za sučelje kriptografskih tokena.
 Red Hat koristi NSS u širokom spektru proizvoda, uključujući sustav certifikata.
-**Standardno PKCS\#11 sučelje**
+\subsection{Standardno PKCS\#11 sučelje}
 PKCS\#11 (engl. public-key cryptography standard) je standard koji specificira API koji se koristi za komunikaciju sa uređajima koji sadrže kriptografske informacije i izvode kriptografske operacije.
 Na ovakav način omogućeno je korištenje na različitom softveru i hardveru.
-**JSS i sloj JNI**
+\subsection{JSS i sloj JNI}
 JSS (engl. network security services for Java) pruža sučelje za sigurnosne operacije koje izvodi NSS.
 JSS je izrađen s JNI (engl. Java native interface) koji omogućava binarnu kompatibilnost između različitih JVM-a (engl. Java virtual machine).
 Ovakav dizajn omogućuje izradu jednom, a pokretanje više puta na različitim platformama.
-
+\pagebreak
 \section{HashiCorp Vault}
 
 HashiCorp Vault je temeljen na sigurnosti identiteta i sustav je koji upravlja enkripcijom \cite{hashicorp-vault-what-is}.
@@ -224,13 +234,15 @@ Vault primarno radi s tokenima koji su povezani s putanjama prema servisu, a tok
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.0\textwidth]{assets/assets.png}
+    \includegraphics[width=1.0\textwidth]{assets/arhitektura.png}
     \caption{HashiCorp Vault Arhitektura \cite{hashicorp-vault-what-is}}
 \end{figure}
 
 Slika prikazuje na koji način Vault radi.
 Cijeli proces započinje autentifikacijom, zatim Vault provjerava identitet klijenta uz pomoć neke pouzdane treće strane.
 Slijed proces autorizacije i usklađivanja prava na strani klijenta na način da mu se dopušta pristup tajnim informacijama prema unaprijed definiranim pravilima.
+
+\pagebreak
 
 \subsection{Značajke Vault-a}
 
@@ -265,17 +277,26 @@ Vault nudi uslugu enkripcije kao usluge kako se organizacija ne bi morala zamara
 Vault može enkriptirati ili dekriptirati podatke pohranjene bilo gdje te se u potpunosti brine da su podaci zaštićeni.
 
 Vault također nudi uslugu upravljanja pristupom na temelju identiteta korisnika.
-Koristi se ACL sustav koji povezuje identitet među različitim pružateljima usluga te kao posrednik brine o pristupu sustavima i tajnama.
+Koristi se ACL sustav koji povezuje identitet među različitim pružateljima usluga te kao posrednik brine o pristupu sustavima i tajnama. Vault nudi svoj sustav za upravljanje ključevima koji brine o distribuciji i životnom ciklusu ključeva, a korisnicima usluge omogućuje centralizirani pristup i standardne kriptografske mogućnosti koji omogućavaju drugi pružatelji usluge upravljanja ključevima. \cite{hashicorp-vault-use-cases}
 
-Vault nudi svoj sustav za upravljanje ključevima koji brine o distribuciji i životnom ciklusu ključeva, a korisnicima usluge omogućuje centralizirani pristup i standardne kriptografske mogućnosti koji omogućavaju drugi pružatelji usluge upravljanja ključevima. \cite{hashicorp-vault-use-cases}
+\subsection{Certifikacijsko tijelo u HashiCorp Vault-u}
 
-\subsection{CA i Vault}
+Vault PKI može dinamički izraditi X.509 certifikat na zahtjev, a izrada certifikata je brza i sigurna. \cite{hashicorp-vault-pki-engine} Vault PKI engine implementira funkcionalnost vlastitog certifikacijskog tijela unutar Vault sustava. Uloga ovog modula je dinamičko izdavanje X.509 certifikata prema unaprijed definiranim pravilima i postavkama. Ključne značajke ovog pristupa uključuju:
 
-Vault PKI može dinamički izraditi X.509 certifikat na zahtjev, a izrada certifikata je brza i sigurna.
-!!!!!!!POTREBNO NADOPISAT NISAM SIG JEL SAM DOBRO RAZUMIO PROVJERITE IDUCE DVIJE RECENICE!!!!!!!!!!!!
-Kako bi se koristio Vault PKI potrebno je zadovoljiti neke preduvjete, a to su: instaliran Vault, API i CLI koji će proslijediti JSON ispis, web UI alat OpenSSL.
-Isto tako na sustavu domaćinu potrebno je dodijeli određena CRUD prava na definiranim putanjama poput "sys/mounts/", "sys/mounts" i "pki".
-\cite{hashicorp-vault-pki-engine}
+\begin{itemize}
+    \item \textbf{Dinamičko izdavanje certifikata} - Certifikati se mogu generirati na zahtjev (bilo to pomoću nekog sučelja ili programski preko REST API-ija), čime se eliminira potreba za dugotrajnim, statičkim certifikatima i smanjuje rizik od njihovog kompromitiranja.
+    \item \textbf{Definiranje uloga} - Administratori mogu kreirati uloge koje specificiraju uvjete poput trajanja certifikata, dozvoljenih domena te drugih parametara, čime se omogućuje fleksibilno i kontrolirano izdavanje certifikata.
+    \item \textbf{Automatizacija i sigurnost} - Proces izdavanja i revokacije certifikata je automatiziran, što smanjuje mogućnost ljudskih pogrešaka te osigurava visoku razinu sigurnosti kroz strogu kontrolu pristupa i bilježenje svih operacija.
+\end{itemize}
+
+Uz to Certifikacijsko tijelo unutar Vault-a dopušta kreiranje korijenskih certifikata (\textit{root certificates}), srednjih certifikata(\textit{engl. intermediate certificate}) i indetifikacijskih (poslužiteljskih) certifikata (\textit{indentity certificate}). Srednji certifikati se granaju od korijenskih certifikata poput grana drveća. Oni djeluju kao posrednici između zaštićenih korijenskih certifikata i poslužiteljskih certifikata koji se izdaju javnosti. U lancu će uvijek postojati barem jedan posredni certifikat, ali može ih biti i više. poslužiteljski certifikati služe za izdavanje krajnjim korisnicima neke domene za koju certifikacijsko tijelo izdaje certifikate. Oni omogućavaju kreiranje pod-domena (\textit{engl. subdomains}) za danu domenu. Na slici ispod prikazana je pod-domena \textit{test.example.com} za domenu \textit{example.com} koja štiti korijenski certifikat.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\textwidth]{assets/certificates.png}
+    \caption{Prikaz samo-potpisujućeg korijenskog certifikata i srednjih certifikati \cite{hashicorp-vault-pki-engine}}
+\end{figure}
+
 
 \chapter{X.509 certifikat}
 
@@ -314,17 +335,36 @@ HTTPS za komunikaciju koristi port 443, a zahtjevi su isti kao i kod HTTP-a.
 Za razliku od HTTP-a, HTTPS prije komunikacije s nekim servisom koristi TLS/SSL rukovanje (engl. handshake) kod kojeg se koristi TLS/SSL certifikat za potvrdu identiteta.
 \cite{cloudflare-https}
 
+\chapter{Implementacija sustava}
+
+Sustav za upravljanje digitalnim certifikatima biti će izrađen kao web aplikacija koja će u pozadini koristiti HashiCorp Vault \cite{hashicorp-vault-what-is}.
+Također, koristeći HashiCorp Vault, napravit će se vlastito certifikacijsko tijelo za idavanje digitalnih certifikata.
+
+Web aplikacija za upravljanje certifikatima će administratoru sustava omogućiti sljedeće funkcionalnosti:
+\begin{itemize}
+    \item \textbf{Autentifikacija} - Administrator će se morati autentificirati kako bi mogao koristiti sustav.
+    \item \textbf{Prikaz i upravljanje ulogama} - Administrator će moći pregledavati, dodavati, uređivati i brisati uloge.
+          Uloga označava predložak prema kojem se potpisuju digitalni certifikati korisnika.
+    \item \textbf{Prikaz certifikata} - Administrator će moći vidjeti sve certifikate koje je izdalo vlastito certifikacijsko tijelo.
+          Za svaki certifikat, administrator će vidjeti identifikacijske podatke o subjektu te razdoblje za koje je izdan certifikat.
+    \item \textbf{Izdavanje certifikata} - Administrator će moći izdati, odnosno potpisati digitalni certifikat korisnika.
+          Administrator će izdati certifikat na temelju zahtjeva za potpisivanje certifikata (engl. Certificate signing request) kojeg će generirati korisnik za kojeg se izdaje certifikat.
+    \item \textbf{Revociranje certifikata} - Administrator će moći revocirati certifikat, odnosno proglasiti ga nevažećim.
+\end{itemize}
+
+
+
 \chapter{Zaključak}
 
-Ovdje treba sažeto rezimirati najvažnije rezultate razrade teme rada. Potrebno je sažeto opisati što je predmet rada \cite{copeland2020ArtificialIntelligence}, koje su metode, tehnike, programski alati ili aplikacije korištene u razradi rada te koje su pretpostavke dokazane, a koje opovrgnute. Sadržajno, ono što se u uvodu rada najavljuje i kasnije je obuhvaćeno u samom radu, moralo bi biti opisano u zaključnom dijelu kroz rezultate rada.
+Ovdje treba sažeto rezimirati najvažnije rezultate razrade teme rada. Potrebno je sažeto opisati što je predmet rada, koje su metode, tehnike, programski alati ili aplikacije korištene u razradi rada te koje su pretpostavke dokazane, a koje opovrgnute. Sadržajno, ono što se u uvodu rada najavljuje i kasnije je obuhvaćeno u samom radu, moralo bi biti opisano u zaključnom dijelu kroz rezultate rada.
 
 \makebackmatter
 % generira popis korištene literature, popis slika (ako je primjenjivo), popis tablica (ako je primjenjivo) i popis isječaka koda (ako je primjenjivo)
 
-\appendices % ako nije potrebno, obrisati ili zakomentirati
+% \appendices % ako nije potrebno, obrisati ili zakomentirati
 
-\chapter{Prilog 1} % ako nije potrebno, obrisati ili zakomentirati
+% \chapter{Prilog 1} % ako nije potrebno, obrisati ili zakomentirati
 
-\chapter{Prilog 2} % ako nije potrebno, obrisati ili zakomentirati
+% \chapter{Prilog 2} % ako nije potrebno, obrisati ili zakomentirati
 
 \end{document}
