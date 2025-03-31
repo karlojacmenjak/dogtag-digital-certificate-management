@@ -353,7 +353,7 @@ Web aplikacija za upravljanje certifikatima će administratoru sustava omogućit
 \end{itemize}
 
 Nadalje, napravit će se jednostavan HTTPS poslužitelj kojim će se prikazati način provjere valjanosti digitalnog ceritfikata u web pregledniku.
-HTTPS poslužitelj će posluživati jednostavnu web stranicu te će u ovom dijelu biti objašnjeno kako napraviti HTTPS poslužitelj koji će koristiti 
+HTTPS poslužitelj će posluživati jednostavnu web stranicu te će u ovom dijelu biti objašnjeno kako napraviti HTTPS poslužitelj koji će koristiti
 vlastiti certifikat koji je potpisan od vlastitog certifikacijskog tijela.
 
 \pagebreak
@@ -361,24 +361,32 @@ vlastiti certifikat koji je potpisan od vlastitog certifikacijskog tijela.
 U nastavku je prikazana arhitektura sustava za upravljanje digitalnim certifikatima.
 
 \begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.8\textwidth]{assets/arhitektura.png}
-  \caption{Prikaz arhitekture sustava za upravljanje digitalnim certifikatima}
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/arhitektura.png}
+    \caption{Prikaz arhitekture sustava za upravljanje digitalnim certifikatima}
 \end{figure}
 
 Sustav se sastoji od 4 dijela:
 \begin{itemize}
-  \item \textbf{Web aplikacija za upravljanje certifikatima} - Web aplikacija komunicira s HashiCorp Vault backend-om te omogućuje administratoru upravljanje digitalnim certifikatima.
-  \item \textbf{HashiCorp Vault} - HashiCorp Vault omogućuje pokretanje vlastitog certifikacijskog tijela, 
-  poslužuje REST API za upravljanje certifikatima i sigurno ih pohranjuje.
-  \item \textbf{HTTPS poslužitelj} - HTTPS poslužitelj poslužuje jednostavnu web stranicu, a cilj mu je prikazati način postavljanja 
-  HTTPS poslužitelja.
-  \item \textbf{Korisnik} - Korisnik komunicira s HTTPS poslužiteljem i provjerava valjanost digitalnog certifikata.
+    \item \textbf{Web aplikacija za upravljanje certifikatima} - Web aplikacija komunicira s HashiCorp Vault backend-om te omogućuje administratoru upravljanje digitalnim certifikatima.
+    \item \textbf{HashiCorp Vault} - HashiCorp Vault omogućuje pokretanje vlastitog certifikacijskog tijela,
+          poslužuje REST API za upravljanje certifikatima i sigurno ih pohranjuje.
+    \item \textbf{HTTPS poslužitelj} - HTTPS poslužitelj poslužuje jednostavnu web stranicu, a cilj mu je prikazati način postavljanja
+          HTTPS poslužitelja.
+    \item \textbf{Korisnik} - Korisnik komunicira s HTTPS poslužiteljem i provjerava valjanost digitalnog certifikata.
 \end{itemize}
 
 \chapter{Zaključak}
 
-Ovdje treba sažeto rezimirati najvažnije rezultate razrade teme rada. Potrebno je sažeto opisati što je predmet rada, koje su metode, tehnike, programski alati ili aplikacije korištene u razradi rada te koje su pretpostavke dokazane, a koje opovrgnute. Sadržajno, ono što se u uvodu rada najavljuje i kasnije je obuhvaćeno u samom radu, moralo bi biti opisano u zaključnom dijelu kroz rezultate rada.
+U ovom radu analizirana je važnost digitalnih certifikata u osiguravanju sigurnosti internetskih komunikacija.
+Implementacija vlastitog sustava za upravljanje digitalnim certifikatima, uz primjenu alata kao što je HashiCorp Vault,
+omogućava pouzdanu i skalabilnu infrastrukturu za provjeru identiteta te zaštitu osjetljivih podataka.
+Korištene su metode i tehnike temeljene na primjeni X.509 certifikata, simetrične i asimetrične kriptografije,
+što je rezultiralo efikasnijim upravljanjem životnim ciklusom certifikata i smanjenjem rizika od kompromitacije.
+Proces izdavanja i opoziva certifikata dodatno doprinosi visokoj razini sigurnosti, dok su primijenjeni programski
+alati omogućili fleksibilnost i prilagodbu sustava specifičnim potrebama organizacije.
+Rad pokazuje da implementacija vlastitog certifikacijskog tijela predstavlja održivo i učinkovito rješenje u
+kontekstu suvremenih izazova digitalne sigurnosti.
 
 \makebackmatter
 % generira popis korištene literature, popis slika (ako je primjenjivo), popis tablica (ako je primjenjivo) i popis isječaka koda (ako je primjenjivo)
