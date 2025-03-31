@@ -366,11 +366,14 @@ U nastavku je prikazana arhitektura sustava za upravljanje digitalnim certifikat
   \caption{Prikaz arhitekture sustava za upravljanje digitalnim certifikatima}
 \end{figure}
 
-Sustav se sastoji od 3 dijela:
+Sustav se sastoji od 4 dijela:
 \begin{itemize}
-  \item \textbf{Web aplikacija za upravljanje certifikatima}
-  \item \textbf{HashiCorp Vault}
-  \item \textbf{HTTPS poslužitelj}
+  \item \textbf{Web aplikacija za upravljanje certifikatima} - Web aplikacija komunicira s HashiCorp Vault backend-om te omogućuje administratoru upravljanje digitalnim certifikatima.
+  \item \textbf{HashiCorp Vault} - HashiCorp Vault omogućuje pokretanje vlastitog certifikacijskog tijela, 
+  poslužuje REST API za upravljanje certifikatima i sigurno ih pohranjuje.
+  \item \textbf{HTTPS poslužitelj} - HTTPS poslužitelj poslužuje jednostavnu web stranicu, a cilj mu je prikazati način postavljanja 
+  HTTPS poslužitelja.
+  \item \textbf{Korisnik} - Korisnik komunicira s HTTPS poslužiteljem i provjerava valjanost digitalnog certifikata.
 \end{itemize}
 
 \chapter{Zaključak}
