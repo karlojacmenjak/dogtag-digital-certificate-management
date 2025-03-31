@@ -234,7 +234,7 @@ Vault primarno radi s tokenima koji su povezani s putanjama prema servisu, a tok
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.0\textwidth]{assets/arhitektura.png}
+    \includegraphics[width=1.0\textwidth]{assets/hashicorp-arhitektura.png}
     \caption{HashiCorp Vault Arhitektura \cite{hashicorp-vault-what-is}}
 \end{figure}
 
@@ -293,7 +293,7 @@ Uz to Certifikacijsko tijelo unutar Vault-a dopušta kreiranje korijenskih certi
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.0\textwidth]{assets/certificates.png}
+    \includegraphics[width=1.0\textwidth]{assets/hashicorp-certificates.png}
     \caption{Prikaz samo-potpisujućeg korijenskog certifikata i srednjih certifikati \cite{hashicorp-vault-pki-engine}}
 \end{figure}
 
@@ -352,7 +352,26 @@ Web aplikacija za upravljanje certifikatima će administratoru sustava omogućit
     \item \textbf{Revociranje certifikata} - Administrator će moći revocirati certifikat, odnosno proglasiti ga nevažećim.
 \end{itemize}
 
-Nadalje, napravit će se jednostavan HTTPS poslužitelj kojem će se prikazati način provjere valjanosti digitalnog ceritfikata u web pregledniku.
+Nadalje, napravit će se jednostavan HTTPS poslužitelj kojim će se prikazati način provjere valjanosti digitalnog ceritfikata u web pregledniku.
+HTTPS poslužitelj će posluživati jednostavnu web stranicu te će u ovom dijelu biti objašnjeno kako napraviti HTTPS poslužitelj koji će koristiti 
+vlastiti certifikat koji je potpisan od vlastitog certifikacijskog tijela.
+
+\pagebreak
+
+U nastavku je prikazana arhitektura sustava za upravljanje digitalnim certifikatima.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{assets/arhitektura.png}
+  \caption{Prikaz arhitekture sustava za upravljanje digitalnim certifikatima}
+\end{figure}
+
+Sustav se sastoji od 3 dijela:
+\begin{itemize}
+  \item \textbf{Web aplikacija za upravljanje certifikatima}
+  \item \textbf{HashiCorp Vault}
+  \item \textbf{HTTPS poslužitelj}
+\end{itemize}
 
 \chapter{Zaključak}
 
