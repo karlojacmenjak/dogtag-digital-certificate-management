@@ -91,10 +91,10 @@ Također, pokazat će se implementacija provjere valjanost certifikata web poslu
 Sigurnost komunikacija na internetu postaje sve važniji aspekt za uzeti u obzir zbog povećanja osjetljivih informacija koje su potrebne za rad u modernim informacijskim sustavima.
 Digitalni certifikati imaju značajnu ulogu kod podizanja te sigurnosti, korištenjem kod HTTPS komunikacije podiže se razina sigurnosti razmjene informacija.
 Implementacijom vlastitog sustava za upravljanje digitalnim certifikatima postiže se neovisnost i potpuna kontrola nad izdavanjem certifikata.
-Međutim upravljanje životnim ciklusom certifikata može biti izazovna ako se radi o velikoj količini certifikata.
+Međutim upravljanje životnim ciklusom certifikata može biti izazovno ako se radi o velikoj količini certifikata.
 
 Kroz praktični dio rada korišten je HashiCorp Vault.
-Primarno je namijenjen čuvanju tajni, ali ima mogućnost izdavanja digitalni certifikata.
+Primarno je namijenjen čuvanju tajni, ali ima mogućnost izdavanja digitalnih certifikata.
 Kroz teorijski dio također je predstavljen Dogtag sustav certifikata za dugoročno i preciznije upravljanje certifikatima.
 
 Cilj projekta je izrada sustava za upravljanje digitalnim certifikatima kod HTTPS komunikacije.
@@ -104,7 +104,7 @@ Projekt uključuje implementaciju alata za izdavanje, revociranje i upravljanje 
 \chapter{Digitalni certifikati}
 
 Digitalni certifikat predstavlja datoteku pomoću koje je omogućena autentifikacija za razne uređaje korištenjem kriptografije ili sustava javnih ključeva \cite{fortinet-digital-certificates}.
-Glavan uloga digitalnih certifikata je da omoguće mrežni pristup samo pouzdanim uređajima.
+Glavna uloga digitalnih certifikata je da omoguće mrežni pristup samo pouzdanim uređajima.
 Digitalni certifikat je našao veliku primjenu kod dokazivanja web stranice prema web pretraživaču.
 Sadrži identifikacijske informacije te IP adresu ili serijski broj uređaja.
 Digitalni certifikat također sadrži kopiju javnog ključa koji je izdan od strane izdavača certifikate te ona služi kod potvrde valjanosti certifikata.
@@ -128,7 +128,7 @@ Kako bi liste bile ažurirane i točne tijela za izdavanje certifikata šalju na
 Kriptografija je sposobnost korištenja algoritama za zaštitu poruka od neovlaštenog čitanja \cite{ibm-cryptography}.
 Poruka koja se prenosi od kreatora poruke prema primatelju za treću stranu mora biti nerazumljiva.
 Ovakva nečitljiva poruka (engl. ciphertext) se može pročitati jedino korištenjem ključa te algoritma koji se koristio tijekom kriptiranja, a izlaz je čitljiv tekst (engl. plain text).
-Kriptografija u današnje doba osigurava 4 osnovna principa: integritet, neporecivost, povjerljivost i autentifikacju.
+Kriptografija u današnje doba osigurava 4 osnovna principa: integritet, neporecivost, povjerljivost i autentifikaciju.
 Kriptografija i kriptografski algoritmi osiguravaju svu sigurnost i privatnost informacija koje se koriste kroz informatičke sustave.
 Osnovna područja u kojem se primjenjuje: upravljanje lozinkama, kriptovalute, sigurno web pretraživanje, elektronički potpis, autentifikacija te sigurna komunikacija.
 Postoje dvije osnovne vrste kriptografije, a to su: simetrična i asimetrična kriptografija.
@@ -160,7 +160,7 @@ U modernim kriptografskim sustavima često se koristi kombinacija simetričnih i
 PKI (engl. public key infrastructure) odnosno infrastruktura javnih ključeva upravlja izdavanjem digitalnih certifikata
 \cite{keyfactor-pki}.
 Sve velike organizacije kojima je stalo do sigurnosti koriste indirektno ili direktno PKI jer se on brine o valjanosti i sigurnosti ključeva potrebnih za enkripciju.
-PKI rješava izazove oke potvrde vlasnika ključa da je pošiljatelj neke poruke zaista onaj za kojeg se predstavlja.
+PKI rješava izazove oko potvrde vlasnika ključa da je pošiljatelj neke poruke zaista onaj za kojeg se predstavlja.
 Digitalni certifikati se često nazivaju PKI certifikati ili X.509 certifikati.
 PKI se prvi puta pojavljuje 1990-ih te se slabo primjenjuje jer je izrada certifikata skupa i dugo traje.
 Digitalne certifikate su koristile tvrtke koje su npr. imale online trgovine i željele pružiti sigurnost prilikom kupovine.
@@ -198,7 +198,7 @@ Dogtag je skup tehnologija, a neke od ključnih značajki sustava su:
     \item jednostavni upis certifikata (SCEP),
     \item arhiviranje i omogućen oporavak ključa za šifriranje,
     \item upravljanje životnim ciklusom pametne kartice,
-    \item opsežna dokumentacije te snažna zajednica korisnika.
+    \item opsežna dokumentacija te snažna zajednica korisnika.
 \end{itemize}
 
 
@@ -289,7 +289,7 @@ Vault PKI može dinamički izraditi X.509 certifikat na zahtjev, a izrada certif
     \item \textbf{Automatizacija i sigurnost} - Proces izdavanja i revokacije certifikata je automatiziran, što smanjuje mogućnost ljudskih pogrešaka te osigurava visoku razinu sigurnosti kroz strogu kontrolu pristupa i bilježenje svih operacija.
 \end{itemize}
 
-Uz to Certifikacijsko tijelo unutar Vault-a dopušta kreiranje korijenskih certifikata (\textit{root certificates}), srednjih certifikata(\textit{engl. intermediate certificate}) i indetifikacijskih (poslužiteljskih) certifikata (\textit{indentity certificate}). Srednji certifikati se granaju od korijenskih certifikata poput grana drveća. Oni djeluju kao posrednici između zaštićenih korijenskih certifikata i poslužiteljskih certifikata koji se izdaju javnosti. U lancu će uvijek postojati barem jedan posredni certifikat, ali može ih biti i više. poslužiteljski certifikati služe za izdavanje krajnjim korisnicima neke domene za koju certifikacijsko tijelo izdaje certifikate. Oni omogućavaju kreiranje pod-domena (\textit{engl. subdomains}) za danu domenu. Na slici ispod prikazana je pod-domena \textit{test.example.com} za domenu \textit{example.com} koja štiti korijenski certifikat.
+Uz to Certifikacijsko tijelo unutar Vault-a dopušta kreiranje korijenskih certifikata (\textit{root certificates}), srednjih certifikata(\textit{engl. intermediate certificate}) i idetifikacijskih (poslužiteljskih) certifikata (\textit{indentity certificate}). Srednji certifikati se granaju od korijenskih certifikata poput grana drveća. Oni djeluju kao posrednici između zaštićenih korijenskih certifikata i poslužiteljskih certifikata koji se izdaju javnosti. U lancu će uvijek postojati barem jedan posredni certifikat, ali može ih biti i više. poslužiteljski certifikati služe za izdavanje krajnjim korisnicima neke domene za koju certifikacijsko tijelo izdaje certifikate. Oni omogućavaju kreiranje pod-domena (\textit{engl. subdomains}) za danu domenu. Na slici ispod prikazana je pod-domena \textit{test.example.com} za domenu \textit{example.com} koja štiti korijenski certifikat.
 
 \begin{figure}[htbp]
     \centering
@@ -310,17 +310,17 @@ Certifikat X.509 sadrži informacije: o verziji, serijskom broju, algoritmu koji
 \section{Primjena X.509 certifikata}
 
 Primjena X.509 certifikata koji sadrži javni ključ i identitet je široka te se koristi kada je potrebna sigurnost u komunikaciji ili kao dokaz vjerodostojnosti.
-Do certifikata se dolazi na način da korisnik pošalje zahtjev za izdavanje certifikata, web sever proslijedi zahtjev prema CA te CA izda certifikat.
+Do certifikata se dolazi na način da korisnik pošalje zahtjev za izdavanje certifikata, web server proslijedi zahtjev prema CA te CA izda certifikat.
 Izrađen X.509 certifikat se može koristi kod digitalnih identiteta, TLS/SSL, sigurnog web pretraživanja, digitalnih potpisa, SSH, e-mail certifikata i sl.
-Može se primjetiti da mu je primjena široka, a pruža zaštitu od potencijalnih prijetnji koje nastaju od zlonamjernih trećih strana koje se lažno predstavljaju.
+Može se primijetiti da mu je primjena široka, a pruža zaštitu od potencijalnih prijetnji koje nastaju od zlonamjernih trećih strana koje se lažno predstavljaju.
 \cite{techtarget-x509-certificate}
 
 \chapter{HTTP i HTTPS}
 
 HTTP (engl. hypertext transfer protocol) je protokol aplikacijskog sloja koji prikazuje podatke na web mjestu razumljive ljudima.
-HTTP sa serverom koji sadrži informacije komuncira preko HTTP zahtjeva i porta 80.
+HTTP sa serverom koji sadrži informacije komunicira preko HTTP zahtjeva i porta 80.
 HTTP zahtjevi koje postavlja prema serveru su: CONNECT, GET, POST, PUT, DELETE, HEAD, OPTIONS.
-Uobičajan HTTP zahtjev sadrži: HTTP verziju, URL, HTTP metodu, HTTP zaglavlje zahtjeva i opcionalno HTTP tijelo.
+Uobičajen HTTP zahtjev sadrži: HTTP verziju, URL, HTTP metodu, HTTP zaglavlje zahtjeva i opcionalno HTTP tijelo.
 Server prema klijentu odgovara pomoću HTTP odgovora koji sadrži: HTTP kod statusa, HTTP zaglavlje odgovora i opcionalno HTTP tijelo.
 Najpoznatiji je HTTP kod statusa koji se sastoji od 3 znamenke, a označavaju status odgovora na zahtjev poslan prema serveru.
 Općenito prvi broj u kodu statusa označuje grupu kojoj kod pripada, to su: 1xx informacija, 2xx uspjeh, 3xx preusmjeravanje, 4xx error klijenta, 5xx error servera.
@@ -338,7 +338,7 @@ Za razliku od HTTP-a, HTTPS prije komunikacije s nekim servisom koristi TLS/SSL 
 \chapter{Implementacija sustava}
 
 Sustav za upravljanje digitalnim certifikatima biti će izrađen kao web aplikacija koja će u pozadini koristiti HashiCorp Vault \cite{hashicorp-vault-what-is}.
-Također, koristeći HashiCorp Vault, napravit će se vlastito certifikacijsko tijelo za idavanje digitalnih certifikata.
+Također, koristeći HashiCorp Vault, napravit će se vlastito certifikacijsko tijelo za izdavanje digitalnih certifikata.
 
 Web aplikacija za upravljanje certifikatima će administratoru sustava omogućiti sljedeće funkcionalnosti:
 \begin{itemize}
@@ -352,7 +352,7 @@ Web aplikacija za upravljanje certifikatima će administratoru sustava omogućit
     \item \textbf{Revociranje certifikata} - Administrator će moći revocirati certifikat, odnosno proglasiti ga nevažećim.
 \end{itemize}
 
-Nadalje, napravit će se jednostavan HTTPS poslužitelj kojim će se prikazati način provjere valjanosti digitalnog ceritfikata u web pregledniku.
+Nadalje, napravit će se jednostavan HTTPS poslužitelj kojim će se prikazati način provjere valjanosti digitalnog certifikata u web pregledniku.
 HTTPS poslužitelj će posluživati jednostavnu web stranicu te će u ovom dijelu biti objašnjeno kako napraviti HTTPS poslužitelj koji će koristiti
 vlastiti certifikat koji je potpisan od vlastitog certifikacijskog tijela.
 
