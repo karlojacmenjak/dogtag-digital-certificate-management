@@ -224,9 +224,9 @@ Ovakav dizajn omogućuje izradu jednom, a pokretanje više puta na različitim p
 \section{HashiCorp Vault}
 
 HashiCorp Vault je temeljen na sigurnosti identiteta i sustav je koji upravlja enkripcijom \cite{hashicorp-vault-what-is}.
-Obavlja usluge enkripcije koje su osigurane autentifikacijom i autorizacijskim metodama kakao bi se osigurala sigurnost, onemogućen pristup trećim stranama te praćenje izvršenih radnji.
+Obavlja usluge enkripcije koje su osigurane autentifikacijom i autorizacijskim metodama kako bi se osigurala sigurnost, onemogućen pristup trećim stranama te praćenje izvršenih radnji.
 Vault pruža sučelje za bilo koju vrstu tajne poput tokena, zaporke, API ključa itd. osiguravajući strogu kontrolu pristupa te bilježenje izvršenih radnji.
-Vault provjera klijente odnosno korisnike koji žele pristupit tajnama te im sukladno dodijeljenim pravima omogućuje pristup.
+Vault provjerava klijente odnosno korisnike koji žele pristupit tajnama te im sukladno dodijeljenim pravima omogućuje pristup.
 
 \subsection{Kako radi Vault?}
 
@@ -246,7 +246,7 @@ Slijed proces autorizacije i usklađivanja prava na strani klijenta na način da
 
 \subsection{Značajke Vault-a}
 
-Vault je dizajniran na način da centralizira i s jednog mjesta upravlja svim vjerodajnicama koje neka tvrtka ima obično razbacano na više mjesta.
+Vault je dizajniran na način da centralizira i s jednog mjesta upravlja svim vjerodajnicama koje bi inaće neka tvrtka držala na više potencijalno nesigurnih mjesta.
 Vault osigurava da su svi korisnici, aplikacije i sustavi prošli autentifikaciju te da su autorizirani za pristup vjerodajnicama.
 Također osigurava da je snimljena sva povijest radnji klijenta.
 Kako bi se zaštitile informacije Vault ih prije spremanja enkriptira te takve sprema u pohranu, na ovaj način podiže se sigurnost pohrane informacije.
@@ -256,7 +256,7 @@ Vault ima ugrađeni sustav povlačenja tajni, ako se desi neki upad u sustav na 
 
 \subsection{HashiCorp Cloud Platform}
 
-Postoji inačica Vaulta koja je hostana odnosno koja je instalirana na nekom udaljenom poslužitelju.
+Postoji inačica Vaulta koju HashiCorp nudi kao uslugu odnosno koja je instalirana na nekom udaljenom poslužitelju.
 Ova inačica pruža brži i jednostavniji pristup, a korištenje odnosno komunikacija prema Vaultu ostaje ista kao i kod samostalne implementacije.
 Takav pristup omogućuje smanjenje operativnih troškova te uklanja brige oko nadogradnji i sigurnosnih kopija.
 Jednostavnost, pouzdanost i lakša kontrola kod ovakvog pristupa omogućuje organizaciji ili tvrtki veći fokus na ostale poslove.
