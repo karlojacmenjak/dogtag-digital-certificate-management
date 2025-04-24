@@ -5,6 +5,8 @@ import { Route, Router } from "@solidjs/router";
 import "./index.css";
 import App from "./routes/App";
 import Dashboard from "./routes/Dashboard";
+import RolesPage from "./routes/RolesPage";
+import RoleDetails from "./routes/RoleDetails";
 
 const root = document.getElementById("root");
 const html = document.getElementsByTagName("html")[0];
@@ -21,6 +23,8 @@ render(
     <Router>
       <Route path="/" component={App} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/roles" component={RolesPage} />
+      <Route path="/roles/:name" component={RoleDetails} />
     </Router>
   ),
   root!
