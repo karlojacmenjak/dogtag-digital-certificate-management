@@ -1,7 +1,7 @@
-import { Component, createResource, createSignal, For, onMount, Show } from "solid-js";
+import { Component, createSignal, For, onMount } from "solid-js";
 import { NavigationBar } from "../components/NavigationBar";
 import { RoleService } from "../services/RoleService";
-import { A, useParams } from "@solidjs/router";
+import { useParams } from "@solidjs/router";
 import { Role } from "../models/Role";
 
 const RoleDetails: Component = () => {
@@ -13,8 +13,8 @@ const RoleDetails: Component = () => {
   const [allowedDomains, setAllowedDomains] = createSignal<string[]>([]);
 
   onMount(async () => {
-    let service = new RoleService();
-    let role = await service.getRole(params.name);
+    let roleService = new RoleService();
+    let role = await roleService.getRole(params.name);
     setRole(role);
 
     setName(role.name);
@@ -29,6 +29,16 @@ const RoleDetails: Component = () => {
         <div>
           <h3>Role name</h3>
           <p>{name()}</p>
+        </div>
+        <div>
+          <h3>Allowed domains</h3>
+          <For each={allowedDomains()}>
+            {(item, index) => (
+              <div>
+                <input type="text" value={item} />
+              </div>
+            )}
+          </For>
         </div>
       </div>
     </div>

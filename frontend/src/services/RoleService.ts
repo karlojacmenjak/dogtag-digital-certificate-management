@@ -1,4 +1,5 @@
 import { Role } from "../models/Role";
+import { AuthService } from "./AuthService";
 import { Context } from "./Context";
 
 export class RoleService {
@@ -6,7 +7,7 @@ export class RoleService {
     let response = await fetch(Context.backend + "/v1/pki/roles", {
       method: "LIST",
       headers: new Headers({
-        "X-Vault-Token": "root-token",
+        "X-Vault-Token": AuthService.getToken(),
       }),
     });
 
@@ -18,7 +19,7 @@ export class RoleService {
     let response = await fetch(Context.backend + "/v1/pki/roles/" + name, {
       method: "GET",
       headers: new Headers({
-        "X-Vault-Token": "root-token",
+        "X-Vault-Token": AuthService.getToken(),
       }),
     });
 

@@ -1,8 +1,6 @@
 import { Context } from "./Context";
 
 export class AuthService {
-  static clientToken: string = "";
-
   async autologin(): Promise<boolean> {
     let token = sessionStorage.getItem("client_token");
     if (token == undefined) {
@@ -25,7 +23,6 @@ export class AuthService {
       return false;
     }
 
-    AuthService.clientToken = token;
     return true;
   }
 
@@ -45,8 +42,11 @@ export class AuthService {
     }
 
     let token = result.auth.client_token;
-
-    AuthService.clientToken = token;
     sessionStorage.setItem("client_token", token);
+  }
+
+  static getToken(): string {
+    let token = sessionStorage.getItem("client_token");
+    return token ?? "";
   }
 }
