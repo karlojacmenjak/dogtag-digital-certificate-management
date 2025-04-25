@@ -1,9 +1,10 @@
 import { Component } from "solid-js";
+import { NavigationBar } from "../components/NavigationBar";
 
 const Dashboard: Component = () => {
   return (
-    <div class="navbar bg-base-100 shadow-sm">
-      <a class="btn btn-ghost text-xl">Home</a>
+    <div>
+      <NavigationBar />
     </div>
   );
 };

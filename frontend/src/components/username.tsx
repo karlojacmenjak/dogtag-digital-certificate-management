@@ -1,4 +1,4 @@
-export function Username() {
+export function Username(props: any) {
   return (
     <div>
       <label class="input validator">
@@ -26,6 +26,8 @@ export function Username() {
           minlength="3"
           maxlength="30"
           title="Only letters, numbers or dash"
+          value={props.value}
+          onInput={(e) => props.onInput(e.currentTarget.value)}
         />
       </label>
       <p class="validator-hint">

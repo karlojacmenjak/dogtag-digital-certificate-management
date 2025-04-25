@@ -1,4 +1,4 @@
-export function Password() {
+export function Password(props: any) {
   return (
     <div>
       <label class="input validator">
@@ -25,6 +25,8 @@ export function Password() {
           minlength="8"
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
           title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+          value={props.value}
+          onInput={(e) => props.onInput(e.currentTarget.value)}
         />
       </label>
       <p class="validator-hint hidden">

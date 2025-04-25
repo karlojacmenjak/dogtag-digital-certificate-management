@@ -1,10 +1,22 @@
 import { useNavigate } from "@solidjs/router";
-import type { Component } from "solid-js";
+import { createSignal, onMount, type Component } from "solid-js";
 import { Password } from "../components/password";
 import { Username } from "../components/username";
+import { AuthService } from "../services/AuthService";
 
 const App: Component = () => {
   const navigate = useNavigate();
+  const [username, setUsername] = createSignal("");
+  const [password, setPassword] = createSignal("");
+
+  onMount(async () => {
+    let authService = new AuthService();
+    let result = await authService.autologin();
+    if (result) {
+      navigate("/dashboard", { replace: true });
+    }
+  });
+
   return (
     <div class="flex flex-row min-h-screen justify-center items-center">
       <div class="card card-border bg-base-100 w-96 shadow-sm">
@@ -21,15 +33,29 @@ const App: Component = () => {
             working with the platform, please login.
           </p>
           <div class="card-actions justify-evenly">
-            <Username />
+            <Username
+              value={username()}
+              onInput={(value: string) => setUsername(value)}
+            />
           </div>
           <div class="card-actions justify-evenly">
-            <Password />
+            <Password
+              value={password()}
+              onInput={(value: string) => setPassword(value)}
+            />
           </div>
           <div class="card-actions justify-end p-8">
             <button
               class="btn btn-primary"
-              onClick={() => navigate("/dashboard", { replace: true })}
+              onClick={async () => {
+                var authService = new AuthService();
+                try {
+                  await authService.login(username().trim(), password().trim());
+                  navigate("/dashboard", { replace: true });
+                } catch (e: any) {
+                  alert(e.message);
+                }
+              }}
             >
               Login
             </button>
