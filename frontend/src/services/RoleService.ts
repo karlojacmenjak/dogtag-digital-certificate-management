@@ -26,7 +26,7 @@ export class RoleService {
 
     let role = new Role();
     role.name = name;
-    role.allowdDomains = result.data.allowed_domains;
+    role.allowedDomains = result.data.allowed_domains;
 
     return role;
   }

@@ -1,12 +1,15 @@
-import { Component, createResource, createSignal, For, Show } from "solid-js";
+import { Component, createResource, createSignal, For, onMount, Show } from "solid-js";
 import { NavigationBar } from "../components/NavigationBar";
 import { RoleService } from "../services/RoleService";
 import { A } from "@solidjs/router";
 
 const RolesPage: Component = () => {
-  const [getRoles] = createResource(async () => {
+  const [roles, setRoles] = createSignal<string[]>([]);
+
+  onMount(async () => {
     let service = new RoleService();
-    return service.getAllRoles();
+    let roles = await service.getAllRoles();
+    setRoles(roles);
   });
 
   return (
@@ -14,8 +17,8 @@ const RolesPage: Component = () => {
       <NavigationBar />
       <div class="p-8">
         <h2 class="text-4xl">Roles</h2>
-        <Show when={getRoles()}>
-          <For each={getRoles()}>
+        <Show when={roles()}>
+          <For each={roles()}>
             {(item) => (
               <A href={"/roles/" + item}>
                 <div class="border mt-4">{item}</div>
