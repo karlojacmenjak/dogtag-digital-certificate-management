@@ -2,3 +2,11 @@
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark, cupcake;
 }
+
+h2 {
+  @apply text-4xl;
+}
+
+h3 {
+  @apply text-2xl;
+}
