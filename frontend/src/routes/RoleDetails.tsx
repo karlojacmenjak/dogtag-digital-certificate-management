@@ -1,7 +1,7 @@
 import { Component, createSignal, For, onMount, Show } from "solid-js";
 import { NavigationBar } from "../components/NavigationBar";
 import { RoleService } from "../services/RoleService";
-import { useNavigate, useParams } from "@solidjs/router";
+import { A, useNavigate, useParams } from "@solidjs/router";
 import { Role } from "../models/Role";
 
 const RoleDetails: Component = () => {
@@ -59,6 +59,15 @@ const RoleDetails: Component = () => {
                 </div>
 
                 <div class="mt-4">
+                  <A href={"/roles/" + role.name + "/generate-certificate"}>
+                    <button class="btn">Generate certificate</button>
+                  </A>
+                  <A href={"/roles/" + role.name + "/sign-certificate"}>
+                    <button class="btn ml-4">Sign certificate</button>
+                  </A>
+                </div>
+
+                <div class="mt-8">
                   <h3>Allowed domains</h3>
 
                   <div>
