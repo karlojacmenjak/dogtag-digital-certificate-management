@@ -8,6 +8,7 @@ import Dashboard from "./routes/Dashboard";
 import RolesPage from "./routes/RolesPage";
 import RoleDetails from "./routes/RoleDetails";
 import EditRole from "./routes/EditRole";
+import CertificatesPage from "./routes/CertificatesPage";
 
 const root = document.getElementById("root");
 const html = document.getElementsByTagName("html")[0];
@@ -28,6 +29,7 @@ render(
       <Route path="/roles/details/:name" component={RoleDetails} />
       <Route path="/roles/create" component={EditRole} />
       <Route path="/roles/edit/:name" component={EditRole} />
+      <Route path="/certificates" component={CertificatesPage} />
     </Router>
   ),
   root!

@@ -6,6 +6,9 @@ export function NavigationBar() {
       <A href="/roles" class="btn btn-ghost text-xl">
         Roles
       </A>
+      <A href="/certificates" class="btn btn-ghost text-xl ml-4">
+        Certificates
+      </A>
     </div>
   );
 }
