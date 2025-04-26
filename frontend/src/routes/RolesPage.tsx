@@ -16,16 +16,25 @@ const RolesPage: Component = () => {
     <div>
       <NavigationBar />
       <div class="p-8">
-        <h2 class="text-4xl">Roles</h2>
-        <Show when={roles()}>
-          <For each={roles()}>
-            {(item) => (
-              <A href={"/roles/" + item}>
-                <div class="border mt-4">{item}</div>
-              </A>
-            )}
-          </For>
-        </Show>
+        <h2>Roles</h2>
+
+        <div>
+          <Show when={roles()}>
+            <For each={roles()}>
+              {(item) => (
+                <A href={"/roles/details/" + item}>
+                  <div class="border mt-4 p-2">{item}</div>
+                </A>
+              )}
+            </For>
+          </Show>
+        </div>
+
+        <div class="mt-8">
+          <A href={"/roles/create"}>
+            <button class="btn">Create role</button>
+          </A>
+        </div>
       </div>
     </div>
   );

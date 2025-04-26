@@ -1,4 +1,4 @@
-import { Component, createSignal, For, onMount } from "solid-js";
+import { Component, createSignal, For, onMount, Show } from "solid-js";
 import { NavigationBar } from "../components/NavigationBar";
 import { RoleService } from "../services/RoleService";
 import { useParams } from "@solidjs/router";
@@ -9,36 +9,123 @@ const RoleDetails: Component = () => {
 
   const [role, setRole] = createSignal<Role>();
 
-  const [name, setName] = createSignal<string>("");
-  const [allowedDomains, setAllowedDomains] = createSignal<string[]>([]);
-
   onMount(async () => {
     let roleService = new RoleService();
     let role = await roleService.getRole(params.name);
     setRole(role);
-
-    setName(role.name);
-    setAllowedDomains(role.allowedDomains);
   });
+
+  const deleteRole = async () => {};
+
+  const editRole = () => {};
 
   return (
     <div>
       <NavigationBar />
       <div class="p-8">
-        <h2 class="text-4xl">Role</h2>
-        <div>
-          <h3>Role name</h3>
-          <p>{name()}</p>
-        </div>
-        <div>
-          <h3>Allowed domains</h3>
-          <For each={allowedDomains()}>
-            {(item, index) => (
+        <h2>Role details</h2>
+
+        <Show when={role()}>
+          {(value) => {
+            let role = value()!;
+
+            return (
               <div>
-                <input type="text" value={item} />
+                <div class="mt-4">
+                  <h3>Role name</h3>
+                  <input
+                    readOnly={true}
+                    class="input"
+                    type="text"
+                    value={role.name}
+                  />
+                </div>
+
+                <div class="mt-4">
+                  <h3>Allowed domains</h3>
+
+                  <div>
+                    <For each={role.allowedDomains}>
+                      {(item) => (
+                        <div class="mt-2">
+                          <input
+                            readOnly={true}
+                            class="input"
+                            type="text"
+                            value={item}
+                          />
+                        </div>
+                      )}
+                    </For>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="mt-4">
+                    <input
+                      disabled={true}
+                      checked={role.allowSubdomains}
+                      class="checkbox"
+                      type="checkbox"
+                    />
+                    <label class="ml-2 font-bold">Allow subdomains</label>
+                  </div>
+
+                  <div class="mt-4">
+                    <input
+                      disabled={true}
+                      checked={role.allowWildcardCertificates}
+                      class="checkbox"
+                      type="checkbox"
+                    />
+                    <label class="ml-2 font-bold">
+                      Allow wildcard certificates
+                    </label>
+                  </div>
+
+                  <div class="mt-4">
+                    <input
+                      disabled={true}
+                      checked={role.allowLocalhost}
+                      class="checkbox"
+                      type="checkbox"
+                    />
+                    <label class="ml-2 font-bold">Allow localhost</label>
+                  </div>
+
+                  <div class="mt-4">
+                    <input
+                      disabled={true}
+                      checked={role.allowAnyName}
+                      class="checkbox"
+                      type="checkbox"
+                    />
+                    <label class="ml-2 font-bold">Allow any name</label>
+                  </div>
+
+                  <div class="mt-4">
+                    <input
+                      disabled={true}
+                      checked={role.enforceHostnames}
+                      class="checkbox"
+                      type="checkbox"
+                    />
+                    <label class="ml-2 font-bold">Enforce hostnames</label>
+                  </div>
+                </div>
               </div>
-            )}
-          </For>
+            );
+          }}
+        </Show>
+
+        <div class="mt-8">
+          <button on:click={() => deleteRole()} class="btn btn-ghost">
+            Delete role
+          </button>
+
+          <button on:click={() => editRole()} class="btn ml-4">
+            Edit role
+          </button>
         </div>
       </div>
     </div>
