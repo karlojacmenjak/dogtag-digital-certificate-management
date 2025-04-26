@@ -16,6 +16,14 @@ class RoleFields {
   enforceHostnames: boolean = false;
 }
 
+class Domain {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
 const EditRole: Component = () => {
   const location = useLocation();
   const params = useParams();
@@ -24,14 +32,15 @@ const EditRole: Component = () => {
   const [role, setRole] = createSignal<Role>();
 
   const [fields, setFields] = createStore<RoleFields>(new RoleFields());
-  const [allowedDomains, setAllowedDomains] = createStore<string[]>([]);
+  const [allowedDomains, setAllowedDomains] = createStore<Domain[]>([]);
   const [newDomain, setNewDomain] = createSignal("");
 
   const [editMode, setEditMode] = createSignal(true);
 
   const readRole = (role: Role) => {
     setFields("name", role.name);
-    setAllowedDomains(role.allowedDomains);
+
+    setAllowedDomains(role.allowedDomains.map((e) => new Domain(e)));
 
     setFields("allowSubdomains", role.allowSubdomains);
     setFields("allowWildcardCertificates", role.allowWildcardCertificates);
@@ -42,7 +51,7 @@ const EditRole: Component = () => {
 
   const fillRole = (role: Role) => {
     role.name = fields.name;
-    role.allowedDomains = allowedDomains;
+    role.allowedDomains = allowedDomains.map((e) => e.name);
 
     role.allowSubdomains = fields.allowSubdomains;
     role.allowWildcardCertificates = fields.allowWildcardCertificates;
@@ -102,7 +111,7 @@ const EditRole: Component = () => {
       return;
     }
 
-    setAllowedDomains([...allowedDomains, domain]);
+    setAllowedDomains([...allowedDomains, new Domain(domain)]);
     setNewDomain("");
   };
 
@@ -139,9 +148,9 @@ const EditRole: Component = () => {
                     <input
                       class="input"
                       type="text"
-                      value={item}
+                      value={item.name}
                       onInput={(e) => {
-                        allowedDomains[index()] = e.target.value;
+                        setAllowedDomains(index(), "name", e.target.value);
                       }}
                     />
                     <button
