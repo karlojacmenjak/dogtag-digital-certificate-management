@@ -29,6 +29,7 @@ export class RoleService {
     role.name = name;
     role.allowedDomains = result.data.allowed_domains;
 
+    role.allowBareDomains = result.data.allow_bare_domains;
     role.allowSubdomains = result.data.allow_subdomains;
     role.allowWildcardCertificates = result.data.allow_wildcard_certificates;
     role.allowLocalhost = result.data.allow_localhost;
@@ -101,6 +102,7 @@ export class RoleService {
 
   private getRoleBody(role: Role) {
     return {
+      allow_bare_domains: role.allowBareDomains,
       allowed_domains: role.allowedDomains,
       allow_subdomains: role.allowSubdomains,
       allow_wildcard_certificates: role.allowWildcardCertificates,

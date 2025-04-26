@@ -9,6 +9,7 @@ import { ArrayUtils } from "../utils/ArrayUtils";
 class RoleFields {
   name: string = "";
 
+  allowBareDomains: boolean = false;
   allowSubdomains: boolean = false;
   allowWildcardCertificates: boolean = false;
   allowLocalhost: boolean = false;
@@ -42,6 +43,7 @@ const EditRole: Component = () => {
 
     setAllowedDomains(role.allowedDomains.map((e) => new Domain(e)));
 
+    setFields("allowBareDomains", role.allowBareDomains);
     setFields("allowSubdomains", role.allowSubdomains);
     setFields("allowWildcardCertificates", role.allowWildcardCertificates);
     setFields("allowLocalhost", role.allowLocalhost);
@@ -53,6 +55,7 @@ const EditRole: Component = () => {
     role.name = fields.name;
     role.allowedDomains = allowedDomains.map((e) => e.name);
 
+    role.allowBareDomains = fields.allowBareDomains;
     role.allowSubdomains = fields.allowSubdomains;
     role.allowWildcardCertificates = fields.allowWildcardCertificates;
     role.allowLocalhost = fields.allowLocalhost;
@@ -178,6 +181,16 @@ const EditRole: Component = () => {
           </div>
 
           <div>
+            <div class="mt-4">
+              <input
+                checked={fields.allowBareDomains}
+                onInput={(e) => setFields("allowBareDomains", e.target.checked)}
+                class="checkbox"
+                type="checkbox"
+              />
+              <label class="ml-2 font-bold">Allow bare domains</label>
+            </div>
+
             <div class="mt-4">
               <input
                 checked={fields.allowSubdomains}

@@ -81,6 +81,16 @@ const RoleDetails: Component = () => {
                   <div class="mt-4">
                     <input
                       disabled={true}
+                      checked={role.allowBareDomains}
+                      class="checkbox"
+                      type="checkbox"
+                    />
+                    <label class="ml-2 font-bold">Allow bare domains</label>
+                  </div>
+
+                  <div class="mt-4">
+                    <input
+                      disabled={true}
                       checked={role.allowSubdomains}
                       class="checkbox"
                       type="checkbox"
