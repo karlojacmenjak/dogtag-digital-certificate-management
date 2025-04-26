@@ -8,4 +8,10 @@ export class Role {
   allowLocalhost: boolean = false;
   allowAnyName: boolean = false;
   enforceHostnames: boolean = false;
+
+  organization: string = "";
+  organizationalUnit: string = "";
+  locality: string = "";
+  province: string = "";
+  country: string = "";
 }

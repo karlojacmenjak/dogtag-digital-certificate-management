@@ -15,6 +15,12 @@ class RoleFields {
   allowLocalhost: boolean = false;
   allowAnyName: boolean = false;
   enforceHostnames: boolean = false;
+
+  organization: string = "";
+  organizationalUnit: string = "";
+  locality: string = "";
+  province: string = "";
+  country: string = "";
 }
 
 class Domain {
@@ -49,6 +55,12 @@ const EditRole: Component = () => {
     setFields("allowLocalhost", role.allowLocalhost);
     setFields("allowAnyName", role.allowAnyName);
     setFields("enforceHostnames", role.enforceHostnames);
+
+    setFields("organization", role.organization);
+    setFields("organizationalUnit", role.organizationalUnit);
+    setFields("locality", role.locality);
+    setFields("province", role.province);
+    setFields("country", role.country);
   };
 
   const fillRole = (role: Role) => {
@@ -61,6 +73,12 @@ const EditRole: Component = () => {
     role.allowLocalhost = fields.allowLocalhost;
     role.allowAnyName = fields.allowAnyName;
     role.enforceHostnames = fields.allowLocalhost;
+
+    role.organization = fields.organization;
+    role.organizationalUnit = fields.organizationalUnit;
+    role.locality = fields.locality;
+    role.province = fields.province;
+    role.country = fields.country;
   };
 
   onMount(async () => {
@@ -242,6 +260,56 @@ const EditRole: Component = () => {
               />
               <label class="ml-2 font-bold">Enforce hostnames</label>
             </div>
+          </div>
+
+          <div class="mt-4">
+            <h3>Organization</h3>
+            <input
+              class="input"
+              type="text"
+              onInput={(e) => setFields("organization", e.target.value)}
+              value={fields.organization}
+            />
+          </div>
+
+          <div class="mt-4">
+            <h3>Organizational unit</h3>
+            <input
+              class="input"
+              type="text"
+              onInput={(e) => setFields("organizationalUnit", e.target.value)}
+              value={fields.organizationalUnit}
+            />
+          </div>
+
+          <div class="mt-4">
+            <h3>Locality</h3>
+            <input
+              class="input"
+              type="text"
+              onInput={(e) => setFields("locality", e.target.value)}
+              value={fields.locality}
+            />
+          </div>
+
+          <div class="mt-4">
+            <h3>Province</h3>
+            <input
+              class="input"
+              type="text"
+              onInput={(e) => setFields("province", e.target.value)}
+              value={fields.province}
+            />
+          </div>
+
+          <div class="mt-4">
+            <h3>Country</h3>
+            <input
+              class="input"
+              type="text"
+              onInput={(e) => setFields("country", e.target.value)}
+              value={fields.country}
+            />
           </div>
         </div>
 

@@ -140,6 +140,56 @@ const RoleDetails: Component = () => {
                     <label class="ml-2 font-bold">Enforce hostnames</label>
                   </div>
                 </div>
+
+                <div class="mt-4">
+                  <h3>Organization</h3>
+                  <input
+                    readOnly={true}
+                    class="input"
+                    type="text"
+                    value={role.organization}
+                  />
+                </div>
+
+                <div class="mt-4">
+                  <h3>Organizational unit</h3>
+                  <input
+                    readOnly={true}
+                    class="input"
+                    type="text"
+                    value={role.organizationalUnit}
+                  />
+                </div>
+
+                <div class="mt-4">
+                  <h3>Locality</h3>
+                  <input
+                    readOnly={true}
+                    class="input"
+                    type="text"
+                    value={role.locality}
+                  />
+                </div>
+
+                <div class="mt-4">
+                  <h3>Province</h3>
+                  <input
+                    readOnly={true}
+                    class="input"
+                    type="text"
+                    value={role.province}
+                  />
+                </div>
+
+                <div class="mt-4">
+                  <h3>Country</h3>
+                  <input
+                    readOnly={true}
+                    class="input"
+                    type="text"
+                    value={role.country}
+                  />
+                </div>
               </div>
             );
           }}

@@ -36,6 +36,12 @@ export class RoleService {
     role.allowAnyName = result.data.allow_any_name;
     role.enforceHostnames = result.data.enforce_hostnames;
 
+    role.organization = result.data.organization;
+    role.organizationalUnit = result.data.ou;
+    role.locality = result.data.locality;
+    role.province = result.data.province;
+    role.country = result.data.country;
+
     return role;
   }
 
@@ -102,13 +108,20 @@ export class RoleService {
 
   private getRoleBody(role: Role) {
     return {
-      allow_bare_domains: role.allowBareDomains,
       allowed_domains: role.allowedDomains,
+
+      allow_bare_domains: role.allowBareDomains,
       allow_subdomains: role.allowSubdomains,
       allow_wildcard_certificates: role.allowWildcardCertificates,
       allow_localhost: role.allowLocalhost,
       allow_any_name: role.allowAnyName,
       enforce_hostnames: role.enforceHostnames,
+
+      organization: role.organization,
+      ou: role.organizationalUnit,
+      locality: role.locality,
+      province: role.province,
+      country: role.country,
     };
   }
 }
