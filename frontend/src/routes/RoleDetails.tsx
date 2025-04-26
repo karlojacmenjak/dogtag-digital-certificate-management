@@ -1,11 +1,12 @@
 import { Component, createSignal, For, onMount, Show } from "solid-js";
 import { NavigationBar } from "../components/NavigationBar";
 import { RoleService } from "../services/RoleService";
-import { useParams } from "@solidjs/router";
+import { useNavigate, useParams } from "@solidjs/router";
 import { Role } from "../models/Role";
 
 const RoleDetails: Component = () => {
   const params = useParams();
+  const navigate = useNavigate();
 
   const [role, setRole] = createSignal<Role>();
 
@@ -17,7 +18,9 @@ const RoleDetails: Component = () => {
 
   const deleteRole = async () => {};
 
-  const editRole = () => {};
+  const editRole = () => {
+    navigate("/roles/edit/" + role()?.name);
+  };
 
   return (
     <div>
