@@ -86,6 +86,19 @@ export class RoleService {
     }
   }
 
+  async deleteRole(role: Role) {
+    role.name = role.name.trim();
+
+    let response = await fetch(Context.backend + "/v1/pki/roles/" + role.name, {
+      method: "DELETE",
+      headers: new Headers({
+        "X-Vault-Token": AuthService.getToken(),
+      }),
+    });
+
+    let result = await response.text();
+  }
+
   private getRoleBody(role: Role) {
     return {
       allowed_domains: role.allowedDomains,

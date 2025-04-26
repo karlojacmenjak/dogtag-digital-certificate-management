@@ -16,7 +16,21 @@ const RoleDetails: Component = () => {
     setRole(role);
   });
 
-  const deleteRole = async () => {};
+  const deleteRole = async () => {
+    let result = confirm("Are you sure?");
+    if (!result) {
+      return;
+    }
+
+    let roleService = new RoleService();
+
+    try {
+      await roleService.deleteRole(role()!);
+      navigate("/roles");
+    } catch (e: any) {
+      alert(e.message);
+    }
+  };
 
   const editRole = () => {
     navigate("/roles/edit/" + role()?.name);
