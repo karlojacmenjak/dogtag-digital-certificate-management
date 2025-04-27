@@ -18,6 +18,29 @@ export class CertificateService {
     return result.data.keys;
   }
 
+  async getCertificate(serial: string) {
+    let response = await fetch(Context.backend + "/v1/pki/cert/" + serial, {
+      method: "GET",
+
+      headers: new Headers({
+        "X-Vault-Token": AuthService.getToken(),
+      }),
+    });
+
+    let result = await response.json();
+
+    if (response.status != 200) {
+      throw new Error(result.errors.join("\n"));
+    }
+
+    let cert = new Certificate();
+
+    cert.serial = serial;
+    cert.certificatePem = result.data.certificate;
+
+    return cert;
+  }
+
   async createCertificate(roleName: string, commonName: string, expirationDate: Date) {
     roleName = roleName.trim();
     commonName = commonName.trim();

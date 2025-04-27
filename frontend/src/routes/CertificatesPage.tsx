@@ -1,6 +1,5 @@
 import { Component, createSignal, For, onMount, Show } from "solid-js";
 import { NavigationBar } from "../components/NavigationBar";
-import { RoleService } from "../services/RoleService";
 import { A } from "@solidjs/router";
 import { CertificateService } from "../services/CertificateService";
 
@@ -22,7 +21,11 @@ const CertificatesPage: Component = () => {
         <div>
           <Show when={certificates()}>
             <For each={certificates()}>
-              {(item) => <div class="border mt-4 p-2">{item}</div>}
+              {(item) => (
+                <A href={"/certificates/" + item}>
+                  <div class="border mt-4 p-2">{item}</div>
+                </A>
+              )}
             </For>
           </Show>
         </div>

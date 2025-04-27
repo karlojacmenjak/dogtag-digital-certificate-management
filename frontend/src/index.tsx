@@ -11,6 +11,7 @@ import EditRole from "./routes/EditRole";
 import CertificatesPage from "./routes/CertificatesPage";
 import GenerateCertificatePage from "./routes/GenerateCertificatePage";
 import SignCertificatePage from "./routes/SignCertificatePage";
+import CertificateDetailsPage from "./routes/CertificateDetailsPage";
 
 const root = document.getElementById("root");
 const html = document.getElementsByTagName("html")[0];
@@ -40,6 +41,7 @@ render(
         component={SignCertificatePage}
       />
       <Route path="/certificates" component={CertificatesPage} />
+      <Route path="/certificates/:serial" component={CertificateDetailsPage} />
     </Router>
   ),
   root!
