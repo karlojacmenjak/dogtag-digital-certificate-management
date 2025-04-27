@@ -1,4 +1,4 @@
-import { Component, createSignal, For, onMount, Show } from "solid-js";
+import { Component, createSignal, For, onMount } from "solid-js";
 import { NavigationBar } from "../components/NavigationBar";
 import { RoleService } from "../services/RoleService";
 import { A } from "@solidjs/router";
@@ -19,15 +19,13 @@ const RolesPage: Component = () => {
         <h2>Roles</h2>
 
         <div>
-          <Show when={roles()}>
-            <For each={roles()}>
-              {(item) => (
-                <A href={"/roles/details/" + item}>
-                  <div class="border mt-4 p-2">{item}</div>
-                </A>
-              )}
-            </For>
-          </Show>
+          <For each={roles()}>
+            {(item) => (
+              <A href={"/roles/details/" + item}>
+                <div class="border mt-4 p-2">{item}</div>
+              </A>
+            )}
+          </For>
         </div>
 
         <div class="mt-8">
