@@ -3,6 +3,9 @@ import { AuthService } from "./AuthService";
 import { Context } from "./Context";
 
 export class CertificateService {
+  private readonly beginCertificateRequest = "-----BEGIN CERTIFICATE REQUEST-----";
+  private readonly endCertificateRequest = "-----END CERTIFICATE REQUEST-----";
+
   async getAllCertificates(): Promise<string[]> {
     let response = await fetch(Context.backend + "/v1/pki/certs", {
       method: "LIST",
@@ -53,6 +56,51 @@ export class CertificateService {
     cert.serial = result.data.serial_number;
     cert.certificatePem = result.data.certificate;
     cert.privateKeyPem = result.data.private_key;
+
+    return cert;
+  }
+
+  async signCertificate(roleName: string, commonName: string, csr: string, expirationDate: Date) {
+    roleName = roleName.trim();
+    commonName = commonName.trim();
+    csr = csr.trim();
+
+    if (roleName == "") {
+      throw new Error("Role name is required.");
+    }
+
+    if (commonName == "") {
+      throw new Error("Common name is required.");
+    }
+
+    if (!csr.startsWith(this.beginCertificateRequest) || !csr.endsWith(this.endCertificateRequest)) {
+      throw new Error("Certificate signing request is not valid.");
+    }
+
+    let body = {
+      csr: csr,
+      common_name: commonName,
+      not_after: expirationDate.toISOString(),
+    };
+
+    let response = await fetch(Context.backend + "/v1/pki/sign/" + roleName, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: new Headers({
+        "X-Vault-Token": AuthService.getToken(),
+      }),
+    });
+
+    let result = await response.json();
+
+    if (response.status != 200) {
+      throw new Error(result.errors.join("\n"));
+    }
+
+    let cert = new Certificate();
+
+    cert.serial = result.data.serial_number;
+    cert.certificatePem = result.data.certificate;
 
     return cert;
   }
