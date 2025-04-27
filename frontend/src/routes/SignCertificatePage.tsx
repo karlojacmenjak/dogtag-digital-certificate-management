@@ -124,7 +124,7 @@ const SignCertificatePage: Component = () => {
             <h3>Serial number</h3>
             <input
               readOnly={true}
-              class="input"
+              class="input w-full"
               type="text"
               value={certificate()?.serial}
             />
