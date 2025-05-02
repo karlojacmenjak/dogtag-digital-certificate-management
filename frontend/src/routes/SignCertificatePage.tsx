@@ -2,7 +2,7 @@ import { A, useParams } from "@solidjs/router";
 import { Component, createSignal, onMount, Show } from "solid-js";
 import { NavigationBar } from "../components/NavigationBar";
 import { CertificateService } from "../services/CertificateService";
-import { Certificate } from "../models/Certificate";
+import { GenerateCertificateResult } from "../models/Certificate";
 
 const SignCertificatePage: Component = () => {
   const params = useParams();
@@ -14,9 +14,9 @@ const SignCertificatePage: Component = () => {
   const [commonName, setCommonName] = createSignal("");
   const [expirationDate, setExpirationDate] = createSignal("");
 
-  const [certificate, setCertificate] = createSignal<Certificate | undefined>(
-    undefined
-  );
+  const [certificate, setCertificate] = createSignal<
+    GenerateCertificateResult | undefined
+  >(undefined);
 
   const [certPemDataUrl, setCertPemDataUrl] = createSignal("");
 

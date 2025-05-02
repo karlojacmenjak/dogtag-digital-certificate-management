@@ -1,4 +1,4 @@
-import { Certificate } from "../models/Certificate";
+import { GenerateCertificateResult } from "../models/Certificate";
 import { AuthService } from "./AuthService";
 import { Context } from "./Context";
 
@@ -33,7 +33,7 @@ export class CertificateService {
       throw new Error(result.errors.join("\n"));
     }
 
-    let cert = new Certificate();
+    let cert = new GenerateCertificateResult();
 
     cert.serial = serial;
     cert.certificatePem = result.data.certificate;
@@ -74,7 +74,7 @@ export class CertificateService {
       throw new Error(result.errors.join("\n"));
     }
 
-    let cert = new Certificate();
+    let cert = new GenerateCertificateResult();
 
     cert.serial = result.data.serial_number;
     cert.certificatePem = result.data.certificate;
@@ -120,7 +120,7 @@ export class CertificateService {
       throw new Error(result.errors.join("\n"));
     }
 
-    let cert = new Certificate();
+    let cert = new GenerateCertificateResult();
 
     cert.serial = result.data.serial_number;
     cert.certificatePem = result.data.certificate;

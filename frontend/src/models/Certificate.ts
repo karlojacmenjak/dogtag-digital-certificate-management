@@ -1,4 +1,4 @@
-export class Certificate {
+export class GenerateCertificateResult {
   serial: string = "";
 
   certificatePem: string = "";

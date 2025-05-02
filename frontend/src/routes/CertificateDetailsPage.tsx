@@ -2,14 +2,14 @@ import { Component, createSignal, onMount, Show } from "solid-js";
 import { NavigationBar } from "../components/NavigationBar";
 import { useParams } from "@solidjs/router";
 import { CertificateService } from "../services/CertificateService";
-import { Certificate } from "../models/Certificate";
+import { GenerateCertificateResult } from "../models/Certificate";
 
 const CertificateDetailsPage: Component = () => {
   const params = useParams();
 
-  const [certificate, setCertificate] = createSignal<Certificate | undefined>(
-    undefined
-  );
+  const [certificate, setCertificate] = createSignal<
+    GenerateCertificateResult | undefined
+  >(undefined);
   const [certPemDataUrl, setCertPemDataUrl] = createSignal("");
 
   onMount(async () => {
