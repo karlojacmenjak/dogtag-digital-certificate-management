@@ -1,4 +1,4 @@
-import { useParams } from "@solidjs/router";
+import { A, useParams } from "@solidjs/router";
 import { Component, createSignal, onMount, Show } from "solid-js";
 import { NavigationBar } from "../components/NavigationBar";
 import { CertificateService } from "../services/CertificateService";
@@ -128,6 +128,10 @@ const SignCertificatePage: Component = () => {
               type="text"
               value={certificate()?.serial}
             />
+
+            <A href={"/certificates/" + certificate()?.serial} target="_blank">
+              <button class="btn mt-2">Details</button>
+            </A>
           </div>
 
           <div class="mt-4">

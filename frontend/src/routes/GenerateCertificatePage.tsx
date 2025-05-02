@@ -1,4 +1,4 @@
-import { useParams } from "@solidjs/router";
+import { A, useParams } from "@solidjs/router";
 import { Component, createSignal, onMount, Show } from "solid-js";
 import { NavigationBar } from "../components/NavigationBar";
 import { CertificateService } from "../services/CertificateService";
@@ -108,22 +108,10 @@ const GenerateCertificatePage: Component = () => {
               type="text"
               value={certificate()?.serial}
             />
-          </div>
 
-          <div class="mt-4">
-            <h3>Certificate</h3>
-
-            <textarea
-              readOnly={true}
-              class="textarea w-full rounded-lg"
-              value={certificate()?.certificatePem}
-            />
-            <a
-              href={certPemDataUrl()}
-              download={certificate()?.serial + ".crt"}
-            >
-              <button class="btn mt-2">Download</button>
-            </a>
+            <A href={"/certificates/" + certificate()?.serial} target="_blank">
+              <button class="btn mt-2">Details</button>
+            </A>
           </div>
 
           <div class="mt-4">
@@ -142,6 +130,22 @@ const GenerateCertificatePage: Component = () => {
             <a
               href={privateKeyDataUrl()}
               download={"private-" + certificate()?.serial + ".pem"}
+            >
+              <button class="btn mt-2">Download</button>
+            </a>
+          </div>
+
+          <div class="mt-4">
+            <h3>Certificate</h3>
+
+            <textarea
+              readOnly={true}
+              class="textarea w-full rounded-lg"
+              value={certificate()?.certificatePem}
+            />
+            <a
+              href={certPemDataUrl()}
+              download={certificate()?.serial + ".crt"}
             >
               <button class="btn mt-2">Download</button>
             </a>
