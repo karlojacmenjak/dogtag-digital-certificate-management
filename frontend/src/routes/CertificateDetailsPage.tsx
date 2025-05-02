@@ -20,6 +20,23 @@ const CertificateDetailsPage: Component = () => {
     setCertPemDataUrl("data:text/plain;base64," + btoa(cert.certificatePem));
   });
 
+  const revokeCertificate = async () => {
+    let result = confirm("Are you sure?");
+    if (!result) {
+      return;
+    }
+
+    let certService = new CertificateService();
+
+    try {
+      let serial = certificate()!.serial;
+      await certService.revokeCertificate(serial);
+      location.reload();
+    } catch (e: any) {
+      alert(e.message);
+    }
+  };
+
   return (
     <div>
       <NavigationBar />
@@ -58,6 +75,18 @@ const CertificateDetailsPage: Component = () => {
 
                   <table class="table border mt-4">
                     <tbody>
+                      <tr class="table-row">
+                        <th>Validity</th>
+                        <td>{cert.isValid ? "Valid" : "Not valid"}</td>
+                      </tr>
+
+                      <Show when={cert.isRevoked}>
+                        <tr class="table-row">
+                          <th>Revocation time</th>
+                          <td>{cert.revocationTime!.toLocaleString()}</td>
+                        </tr>
+                      </Show>
+
                       <tr class="table-row">
                         <th>Issuer common name</th>
                         <td>{cert.issuerCommonName}</td>
@@ -104,6 +133,14 @@ const CertificateDetailsPage: Component = () => {
                       </tr>
                     </tbody>
                   </table>
+
+                  <Show when={!cert.isRevoked}>
+                    <div class="mt-8">
+                      <button on:click={() => revokeCertificate()} class="btn">
+                        Revoke certificate
+                      </button>
+                    </div>
+                  </Show>
                 </div>
               );
             }}

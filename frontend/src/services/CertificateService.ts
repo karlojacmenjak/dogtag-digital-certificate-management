@@ -41,6 +41,13 @@ export class CertificateService {
     cert.certificatePem = result.data.certificate;
     this.getCertificateDetails(cert);
 
+    if (result.data.revocation_time != 0) {
+      cert.isRevoked = true;
+      cert.revocationTime = new Date(result.data.revocation_time_rfc3339);
+    }
+
+    cert.isValid = this.getCertificateValidity(cert);
+
     return cert;
   }
 
@@ -129,6 +136,38 @@ export class CertificateService {
     cert.certificatePem = result.data.certificate;
 
     return cert;
+  }
+
+  async revokeCertificate(serial: string) {
+    let body = {
+      serial_number: serial,
+    };
+
+    let response = await fetch(Context.backend + "/v1/pki/revoke", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: new Headers({
+        "X-Vault-Token": AuthService.getToken(),
+      }),
+    });
+
+    let result = await response.json();
+
+    if (response.status != 200) {
+      throw new Error(result.errors.join("\n"));
+    }
+  }
+
+  private getCertificateValidity(cert: Certificate) {
+    if (cert.isRevoked) {
+      return false;
+    }
+
+    let notBefore = cert.notValidBefore.getTime();
+    let notAfter = cert.notValidAfter.getTime();
+    let now = new Date().getTime();
+
+    return now >= notBefore && now < notAfter;
   }
 
   private getCertificateDetails(cert: Certificate) {
