@@ -2,14 +2,14 @@ import { Component, createSignal, onMount, Show } from "solid-js";
 import { NavigationBar } from "../components/NavigationBar";
 import { useParams } from "@solidjs/router";
 import { CertificateService } from "../services/CertificateService";
-import { GenerateCertificateResult } from "../models/Certificate";
+import { Certificate } from "../models/Certificate";
 
 const CertificateDetailsPage: Component = () => {
   const params = useParams();
 
-  const [certificate, setCertificate] = createSignal<
-    GenerateCertificateResult | undefined
-  >(undefined);
+  const [certificate, setCertificate] = createSignal<Certificate | undefined>(
+    undefined
+  );
   const [certPemDataUrl, setCertPemDataUrl] = createSignal("");
 
   onMount(async () => {
@@ -29,7 +29,7 @@ const CertificateDetailsPage: Component = () => {
         <div>
           <Show when={certificate()}>
             {(value) => {
-              let certificate = value()!;
+              let cert = value()!;
 
               return (
                 <div>
@@ -39,7 +39,7 @@ const CertificateDetailsPage: Component = () => {
                       readOnly={true}
                       class="input w-full"
                       type="text"
-                      value={certificate.serial}
+                      value={cert.serial}
                     />
                   </div>
 
@@ -49,15 +49,61 @@ const CertificateDetailsPage: Component = () => {
                     <textarea
                       readOnly={true}
                       class="textarea w-full rounded-lg"
-                      value={certificate.certificatePem}
+                      value={cert.certificatePem}
                     />
-                    <a
-                      href={certPemDataUrl()}
-                      download={certificate.serial + ".crt"}
-                    >
+                    <a href={certPemDataUrl()} download={cert.serial + ".crt"}>
                       <button class="btn mt-2">Download</button>
                     </a>
                   </div>
+
+                  <table class="table border mt-4">
+                    <tbody>
+                      <tr class="table-row">
+                        <th>Issuer common name</th>
+                        <td>{cert.issuerCommonName}</td>
+                      </tr>
+
+                      <tr class="table-row">
+                        <th>Subject common name</th>
+                        <td>{cert.subjectCommonName}</td>
+                      </tr>
+
+                      <tr class="table-row">
+                        <th>Organization</th>
+                        <td>{cert.subjectOrganization}</td>
+                      </tr>
+
+                      <tr class="table-row">
+                        <th>OrganizationalUnit</th>
+                        <td>{cert.subjectOrganizationalUnit}</td>
+                      </tr>
+
+                      <tr class="table-row">
+                        <th>Locality</th>
+                        <td>{cert.subjectLocality}</td>
+                      </tr>
+
+                      <tr class="table-row">
+                        <th>Province</th>
+                        <td>{cert.subjectProvince}</td>
+                      </tr>
+
+                      <tr class="table-row">
+                        <th>Country</th>
+                        <td>{cert.subjectCountry}</td>
+                      </tr>
+
+                      <tr class="table-row">
+                        <th>Not valid before</th>
+                        <td>{cert.notValidBefore.toLocaleString()}</td>
+                      </tr>
+
+                      <tr class="table-row">
+                        <th>Not valid after</th>
+                        <td>{cert.notValidAfter.toLocaleString()}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               );
             }}

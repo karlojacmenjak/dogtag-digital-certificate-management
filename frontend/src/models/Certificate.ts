@@ -4,3 +4,19 @@ export class GenerateCertificateResult {
   certificatePem: string = "";
   privateKeyPem: string = "";
 }
+
+export class Certificate {
+  serial: string = "";
+  certificatePem: string = "";
+
+  issuerCommonName: string = "";
+  subjectCommonName: string = "";
+  subjectOrganization: string = "";
+  subjectOrganizationalUnit: string = "";
+  subjectLocality: string = "";
+  subjectProvince: string = "";
+  subjectCountry: string = "";
+
+  notValidBefore!: Date;
+  notValidAfter!: Date;
+}

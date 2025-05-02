@@ -1,6 +1,8 @@
-import { GenerateCertificateResult } from "../models/Certificate";
+import { Certificate, GenerateCertificateResult } from "../models/Certificate";
 import { AuthService } from "./AuthService";
 import { Context } from "./Context";
+import * as pkijs from "pkijs";
+import * as pvtsutils from "pvtsutils";
 
 export class CertificateService {
   private readonly beginCertificateRequest = "-----BEGIN CERTIFICATE REQUEST-----";
@@ -33,10 +35,11 @@ export class CertificateService {
       throw new Error(result.errors.join("\n"));
     }
 
-    let cert = new GenerateCertificateResult();
+    let cert = new Certificate();
 
     cert.serial = serial;
     cert.certificatePem = result.data.certificate;
+    this.getCertificateDetails(cert);
 
     return cert;
   }
@@ -126,5 +129,49 @@ export class CertificateService {
     cert.certificatePem = result.data.certificate;
 
     return cert;
+  }
+
+  private getCertificateDetails(cert: Certificate) {
+    let pem = cert.certificatePem
+      .replace("-----BEGIN CERTIFICATE-----", "")
+      .replace("-----END CERTIFICATE-----", "")
+      .replaceAll("\n", "")
+      .replaceAll("\r", "")
+      .trim();
+
+    let buffer = pvtsutils.Convert.FromBase64(pem);
+    let pkiCert = pkijs.Certificate.fromBER(buffer);
+
+    const rdnmap: Record<string, string> = {
+      CN: "2.5.4.3",
+      O: "2.5.4.10",
+      OU: "2.5.4.11",
+      L: "2.5.4.7",
+      ST: "2.5.4.8",
+      C: "2.5.4.6",
+    };
+
+    let issuerAttrs = pkiCert.issuer.typesAndValues;
+    let subjectAttrs = pkiCert.subject.typesAndValues;
+
+    cert.issuerCommonName = this.getAttribute(issuerAttrs, rdnmap["CN"]);
+    cert.subjectCommonName = this.getAttribute(subjectAttrs, rdnmap["CN"]);
+    cert.subjectOrganization = this.getAttribute(subjectAttrs, rdnmap["O"]);
+    cert.subjectOrganizationalUnit = this.getAttribute(subjectAttrs, rdnmap["OU"]);
+    cert.subjectLocality = this.getAttribute(subjectAttrs, rdnmap["L"]);
+    cert.subjectProvince = this.getAttribute(subjectAttrs, rdnmap["ST"]);
+    cert.subjectCountry = this.getAttribute(subjectAttrs, rdnmap["C"]);
+
+    cert.notValidBefore = pkiCert.notBefore.value;
+    cert.notValidAfter = pkiCert.notAfter.value;
+  }
+
+  private getAttribute(attrs: pkijs.AttributeTypeAndValue[], type: string) {
+    let attr = attrs.find((e) => e.type == type);
+    if (attr == undefined) {
+      return "";
+    }
+
+    return attr.value.valueBlock.value;
   }
 }
