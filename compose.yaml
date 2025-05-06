@@ -13,6 +13,8 @@ services:
       - vault-config:/vault/config
       - vault-file:/vault/file
       - vault-logs:/vault/logs
+    env_file:
+      - .env
 
 volumes:
   vault-config:
