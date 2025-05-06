@@ -72,6 +72,23 @@ vault write auth/userpass/users/$VAULT_USERNAME \
     password="$VAULT_PASSWORD" \
     policies=admin
 
+# Create entity for the user
+echo "[vault-setup] Creating Identity entity for user '$VAULT_USERNAME'..."
+ENTITY_ID=$(vault write -format=json identity/entity name="$VAULT_USERNAME" \
+  policies="admin" \
+  metadata=team=dev \
+  | jq -r ".data.id")
+
+# Lookup accessor for userpass method
+USERPASS_ACCESSOR=$(vault auth list -format=json | jq -r '.["userpass/"].accessor')
+
+# Create entity alias to map userpass login to the entity
+echo "[vault-setup] Creating entity alias..."
+vault write identity/entity-alias name="$VAULT_USERNAME" \
+  canonical_id="$ENTITY_ID" \
+  mount_accessor="$USERPASS_ACCESSOR"
+
+
 # Done
 echo "[vault-setup] Vault setup complete. Process will now continue in foreground."
 
