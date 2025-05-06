@@ -13,7 +13,6 @@ services:
       - vault-config:/vault/config
       - vault-file:/vault/file
       - vault-logs:/vault/logs
-    command: vault server -config=/vault/config/local.json
 
 volumes:
   vault-config:
