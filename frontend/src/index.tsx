@@ -3,7 +3,6 @@ import { render } from "solid-js/web";
 
 import { Route, Router } from "@solidjs/router";
 import "./index.css";
-import App from "./routes/App";
 import Dashboard from "./routes/Dashboard";
 import RolesPage from "./routes/RolesPage";
 import RoleDetails from "./routes/RoleDetails";
@@ -12,6 +11,7 @@ import CertificatesPage from "./routes/CertificatesPage";
 import GenerateCertificatePage from "./routes/GenerateCertificatePage";
 import SignCertificatePage from "./routes/SignCertificatePage";
 import CertificateDetailsPage from "./routes/CertificateDetailsPage";
+import LoginPage from "./routes/LoginPage";
 
 const root = document.getElementById("root");
 const html = document.getElementsByTagName("html")[0];
@@ -26,7 +26,7 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 render(
   () => (
     <Router>
-      <Route path="/" component={App} />
+      <Route path="/" component={LoginPage} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/roles" component={RolesPage} />
       <Route path="/roles/details/:name" component={RoleDetails} />

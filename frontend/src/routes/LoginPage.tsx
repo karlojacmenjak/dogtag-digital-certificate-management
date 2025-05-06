@@ -4,7 +4,7 @@ import { Password } from "../components/password";
 import { Username } from "../components/username";
 import { AuthService } from "../services/AuthService";
 
-const App: Component = () => {
+const LoginPage: Component = () => {
   const navigate = useNavigate();
   const [username, setUsername] = createSignal("");
   const [password, setPassword] = createSignal("");
@@ -66,4 +66,4 @@ const App: Component = () => {
   );
 };
 
-export default App;
+export default LoginPage;
