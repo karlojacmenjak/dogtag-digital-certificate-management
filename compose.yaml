@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  vault:
+    build:
+      context: ./hashicorp-vault
+    container_name: hashicorp-vault
+    ports:
+      - "8200:8200"
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - vault-config:/vault/config
+      - vault-file:/vault/file
+      - vault-logs:/vault/logs
+    command: vault server -config=/vault/config/local.json
+
+volumes:
+  vault-config:
+  vault-file:
+  vault-logs:
