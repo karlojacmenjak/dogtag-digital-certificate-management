@@ -19,7 +19,7 @@ class _CreateCsrPageState extends State<CreateCsrPage> {
   var tecOrganization = TextEditingController();
   var tecOrganizationalUnit = TextEditingController();
   var tecLocality = TextEditingController();
-  var tecState = TextEditingController();
+  var tecProvince = TextEditingController();
   var tecCountry = TextEditingController();
 
   String? privateKeyPath;
@@ -30,7 +30,7 @@ class _CreateCsrPageState extends State<CreateCsrPage> {
   @override
   void initState() {
     super.initState();
-    tecs = [tecCommonName, tecOrganization, tecOrganizationalUnit, tecLocality, tecState, tecCountry];
+    tecs = [tecCommonName, tecOrganization, tecOrganizationalUnit, tecLocality, tecProvince, tecCountry];
   }
 
   void generateCSR() async {
@@ -45,7 +45,7 @@ class _CreateCsrPageState extends State<CreateCsrPage> {
         organization: tecOrganization.text.trim(),
         organizationalUnit: tecOrganizationalUnit.text.trim(),
         locality: tecLocality.text.trim(),
-        state: tecState.text.trim(),
+        province: tecProvince.text.trim(),
         country: tecCountry.text.trim(),
         keyPair: certService.decodeRSAKeyPairFromPem(keyPem),
       );
@@ -116,10 +116,10 @@ class _CreateCsrPageState extends State<CreateCsrPage> {
             const SizedBox(height: 20),
             //
             TextField(
-              controller: tecState,
+              controller: tecProvince,
               decoration: InputDecoration(
                 isDense: true,
-                label: Text('State'),
+                label: Text('Province'),
                 border: OutlineInputBorder(),
               ),
             ),
@@ -150,6 +150,7 @@ class _CreateCsrPageState extends State<CreateCsrPage> {
             FileSelectorWidget(
               selectedPath: csrPath,
               mode: FileSelectorMode.saveFile,
+              suggestedName: '${tecCommonName.text.trim()}.csr',
               acceptedTypeGroups: [
                 XTypeGroup(label: 'CSR file', extensions: ['csr'])
               ],

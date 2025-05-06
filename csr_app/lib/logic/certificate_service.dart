@@ -18,7 +18,7 @@ class CertificateService {
       'O': info.organization,
       'OU': info.organizationalUnit,
       'L': info.locality,
-      'ST': info.state,
+      'ST': info.province,
       'C': info.country,
     };
 

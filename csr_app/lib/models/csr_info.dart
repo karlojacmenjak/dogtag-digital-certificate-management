@@ -5,7 +5,7 @@ class CSRInfo {
   String organization;
   String organizationalUnit;
   String locality;
-  String state;
+  String province;
   String country;
 
   AsymmetricKeyPair<RSAPublicKey, RSAPrivateKey> keyPair;
@@ -15,7 +15,7 @@ class CSRInfo {
     required this.organization,
     required this.organizationalUnit,
     required this.locality,
-    required this.state,
+    required this.province,
     required this.country,
     required this.keyPair,
   });
