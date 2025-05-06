@@ -10,6 +10,7 @@ const SignCertificatePage: Component = () => {
   const [roleName, setRoleName] = createSignal("");
 
   const [csrFile, setCsrFile] = createSignal<File | undefined>(undefined);
+  const [csrText, setCsrText] = createSignal("");
 
   const [commonName, setCommonName] = createSignal("");
   const [expirationDate, setExpirationDate] = createSignal("");
@@ -24,6 +25,16 @@ const SignCertificatePage: Component = () => {
     setRoleName(params.role_name);
   });
 
+  const onCsrFileChange = async (file: File) => {
+    let csr = await file.text();
+
+    let certService = new CertificateService();
+
+    setCsrText(csr);
+    setCsrFile(file);
+    setCommonName(certService.getCommonNameFromCsr(csr));
+  };
+
   const signCertificate = async () => {
     let certService = new CertificateService();
 
@@ -32,7 +43,7 @@ const SignCertificatePage: Component = () => {
         throw new Error("Certificate signing request file is required.");
       }
 
-      let csr = await csrFile()!.text();
+      let csr = csrText();
 
       if (expirationDate() == "") {
         throw new Error("Not valid after date is required.");
@@ -40,7 +51,6 @@ const SignCertificatePage: Component = () => {
 
       let cert = await certService.signCertificate(
         roleName(),
-        commonName(),
         csr,
         new Date(expirationDate())
       );
@@ -80,7 +90,7 @@ const SignCertificatePage: Component = () => {
                 on:change={(e) => {
                   let files = e.target.files;
                   if (files != undefined && files.length == 1) {
-                    setCsrFile(files[0]);
+                    onCsrFileChange(files[0]);
                   }
                 }}
               />
@@ -89,9 +99,9 @@ const SignCertificatePage: Component = () => {
             <div class="mt-4">
               <h3>Common name</h3>
               <input
+                readOnly={true}
                 class="input"
                 type="text"
-                onInput={(e) => setCommonName(e.target.value)}
                 value={commonName()}
               />
             </div>

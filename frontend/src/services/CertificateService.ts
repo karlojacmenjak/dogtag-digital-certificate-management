@@ -8,6 +8,15 @@ export class CertificateService {
   private readonly beginCertificateRequest = "-----BEGIN CERTIFICATE REQUEST-----";
   private readonly endCertificateRequest = "-----END CERTIFICATE REQUEST-----";
 
+  private readonly rdnmap: Record<string, string> = {
+    CN: "2.5.4.3",
+    O: "2.5.4.10",
+    OU: "2.5.4.11",
+    L: "2.5.4.7",
+    ST: "2.5.4.8",
+    C: "2.5.4.6",
+  };
+
   async getAllCertificates(): Promise<string[]> {
     let response = await fetch(Context.backend + "/v1/pki/certs", {
       method: "LIST",
@@ -105,20 +114,17 @@ export class CertificateService {
     return cert;
   }
 
-  async signCertificate(roleName: string, commonName: string, csr: string, expirationDate: Date) {
+  async signCertificate(roleName: string, csr: string, expirationDate: Date) {
     roleName = roleName.trim();
-    commonName = commonName.trim();
     csr = csr.trim();
 
     if (roleName == "") {
       throw new Error("Role name is required.");
     }
 
-    if (commonName == "") {
-      throw new Error("Common name is required.");
-    }
+    let commonName = this.getCommonNameFromCsr(csr);
 
-    if (!csr.startsWith(this.beginCertificateRequest) || !csr.endsWith(this.endCertificateRequest)) {
+    if (commonName == "") {
       throw new Error("Certificate signing request is not valid.");
     }
 
@@ -182,6 +188,33 @@ export class CertificateService {
     return now >= notBefore && now < notAfter;
   }
 
+  getCommonNameFromCsr(csr: string) {
+    if (!this.checkCertificateRequest(csr)) {
+      return "";
+    }
+
+    try {
+      let pem = csr
+        .replace(this.beginCertificateRequest, "")
+        .replace(this.endCertificateRequest, "")
+        .replaceAll("\n", "")
+        .replaceAll("\r", "")
+        .trim();
+
+      let buffer = pvtsutils.Convert.FromBase64(pem);
+      let pkiCert = pkijs.CertificationRequest.fromBER(buffer);
+      let subjectAttrs = pkiCert.subject.typesAndValues;
+
+      return this.getAttribute(subjectAttrs, this.rdnmap["CN"]);
+    } catch (e) {
+      return "";
+    }
+  }
+
+  private checkCertificateRequest(csr: string) {
+    return csr.startsWith(this.beginCertificateRequest) && csr.endsWith(this.endCertificateRequest);
+  }
+
   private getCertificateDetails(cert: Certificate) {
     let pem = cert.certificatePem
       .replace("-----BEGIN CERTIFICATE-----", "")
@@ -193,25 +226,16 @@ export class CertificateService {
     let buffer = pvtsutils.Convert.FromBase64(pem);
     let pkiCert = pkijs.Certificate.fromBER(buffer);
 
-    const rdnmap: Record<string, string> = {
-      CN: "2.5.4.3",
-      O: "2.5.4.10",
-      OU: "2.5.4.11",
-      L: "2.5.4.7",
-      ST: "2.5.4.8",
-      C: "2.5.4.6",
-    };
-
     let issuerAttrs = pkiCert.issuer.typesAndValues;
     let subjectAttrs = pkiCert.subject.typesAndValues;
 
-    cert.issuerCommonName = this.getAttribute(issuerAttrs, rdnmap["CN"]);
-    cert.subjectCommonName = this.getAttribute(subjectAttrs, rdnmap["CN"]);
-    cert.subjectOrganization = this.getAttribute(subjectAttrs, rdnmap["O"]);
-    cert.subjectOrganizationalUnit = this.getAttribute(subjectAttrs, rdnmap["OU"]);
-    cert.subjectLocality = this.getAttribute(subjectAttrs, rdnmap["L"]);
-    cert.subjectProvince = this.getAttribute(subjectAttrs, rdnmap["ST"]);
-    cert.subjectCountry = this.getAttribute(subjectAttrs, rdnmap["C"]);
+    cert.issuerCommonName = this.getAttribute(issuerAttrs, this.rdnmap["CN"]);
+    cert.subjectCommonName = this.getAttribute(subjectAttrs, this.rdnmap["CN"]);
+    cert.subjectOrganization = this.getAttribute(subjectAttrs, this.rdnmap["O"]);
+    cert.subjectOrganizationalUnit = this.getAttribute(subjectAttrs, this.rdnmap["OU"]);
+    cert.subjectLocality = this.getAttribute(subjectAttrs, this.rdnmap["L"]);
+    cert.subjectProvince = this.getAttribute(subjectAttrs, this.rdnmap["ST"]);
+    cert.subjectCountry = this.getAttribute(subjectAttrs, this.rdnmap["C"]);
 
     cert.notValidBefore = pkiCert.notBefore.value;
     cert.notValidAfter = pkiCert.notAfter.value;
