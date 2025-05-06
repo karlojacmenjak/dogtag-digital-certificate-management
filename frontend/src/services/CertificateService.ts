@@ -20,6 +20,18 @@ export class CertificateService {
     return result.data.keys;
   }
 
+  async getRevokedCertificates(): Promise<string[]> {
+    let response = await fetch(Context.backend + "/v1/pki/certs/revoked", {
+      method: "LIST",
+      headers: new Headers({
+        "X-Vault-Token": AuthService.getToken(),
+      }),
+    });
+
+    let result = await response.json();
+    return result.data.keys;
+  }
+
   async getCertificate(serial: string) {
     let response = await fetch(Context.backend + "/v1/pki/cert/" + serial, {
       method: "GET",
