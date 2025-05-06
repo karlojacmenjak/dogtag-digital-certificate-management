@@ -3,12 +3,19 @@ import { A } from "@solidjs/router";
 export function NavigationBar() {
   return (
     <div class="navbar bg-base-100 shadow-sm">
-      <A href="/roles" class="btn btn-ghost text-xl">
-        Roles
-      </A>
-      <A href="/certificates" class="btn btn-ghost text-xl ml-4">
-        Certificates
-      </A>
+      <div class="navbar-start">
+        <button class="btn btn-ghost text-xl">
+          <A href="/roles"> Roles </A>
+        </button>
+
+        <button class="btn btn-ghost text-xl ml-4">
+          <A href="/certificates"> Certificates </A>
+        </button>
+      </div>
+
+      <div class="navbar-end">
+        <button class="btn btn-ghost text-xl">Log out</button>
+      </div>
     </div>
   );
 }
