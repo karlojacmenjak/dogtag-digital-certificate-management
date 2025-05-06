@@ -30,5 +30,34 @@ vault operator unseal "$UNSEAL_KEY"
 # Optional: Login (e.g. for scripting further setup)
 vault login "$ROOT_TOKEN"
 
+# Set environment variables from Docker
+VAULT_USERNAME=${VAULT_USERNAME:-vaultuser}
+VAULT_PASSWORD=${VAULT_PASSWORD:-changeme}
+
+# Enable PKI
+vault secrets enable -path=pki pki || echo "PKI already enabled"
+
+# Set max TTL
+vault secrets tune -max-lease-ttl=87600h pki
+
+# Generate root certificate
+vault write pki/root/generate/internal \
+    common_name="example.com" \
+    ttl=87600h > /vault/config/root-cert.json
+
+# Configure URLs
+vault write pki/config/urls \
+    issuing_certificates="$VAULT_ADDR/v1/pki/ca" \
+    crl_distribution_points="$VAULT_ADDR/v1/pki/crl"
+
+# Enable userpass auth method
+vault auth enable userpass || echo "userpass already enabled"
+
+# Create a user
+vault write auth/userpass/users/$VAULT_USERNAME \
+    password="$VAULT_PASSWORD" \
+    policies=default
+
+
 # Bring Vault process back to foreground
 wait $VAULT_PID
