@@ -45,6 +45,10 @@ export class AuthService {
     sessionStorage.setItem("client_token", token);
   }
 
+  logout() {
+    sessionStorage.removeItem("client_token");
+  }
+
   static getToken(): string {
     let token = sessionStorage.getItem("client_token");
     return token ?? "";

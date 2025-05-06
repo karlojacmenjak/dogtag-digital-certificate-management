@@ -1,6 +1,15 @@
-import { A } from "@solidjs/router";
+import { A, useNavigate } from "@solidjs/router";
+import { AuthService } from "../services/AuthService";
 
 export function NavigationBar() {
+  const navigate = useNavigate();
+
+  const logout = () => {
+    let authService = new AuthService();
+    authService.logout();
+    navigate("/");
+  };
+
   return (
     <div class="navbar bg-base-100 shadow-sm">
       <div class="navbar-start">
@@ -14,7 +23,9 @@ export function NavigationBar() {
       </div>
 
       <div class="navbar-end">
-        <button class="btn btn-ghost text-xl">Log out</button>
+        <button on:click={() => logout()} class="btn btn-ghost text-xl">
+          Log out
+        </button>
       </div>
     </div>
   );
