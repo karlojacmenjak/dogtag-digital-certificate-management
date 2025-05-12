@@ -7,6 +7,7 @@
 % uncomment the above line if writing in English
 
 \usepackage[utf8]{inputenc}
+\usepackage{float}
 
 
 \vrstaRada{\projekt}
@@ -384,7 +385,7 @@ U nastavku ovoga poglavlja opisane su glavne funkcionalnosti sustava na primjeru
 
 \subsection{Autentifikacija administratora}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/login.png}
     \caption{Prijava administratora u sustav}
@@ -394,13 +395,13 @@ Administrator pristupa aplikaciji putem sučelja za prijavu. Time se osigurava d
 
 \subsection{Upravljanje ulogama}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/roles.png}
     \caption{Popis uloga za izdavanje certifikata}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/role-details.png}
     \caption{Detalji određene uloge}
@@ -410,7 +411,7 @@ Uloge predstavljaju predloške koji definiraju uvjete za izdavanje certifikata. 
 
 \subsection{Generiranje CSR-a}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/csr.png}
     \caption{Generiranje zahtjeva za potpisivanje certifikata (CSR)}
@@ -420,7 +421,7 @@ Korisnik unosi podatke o subjektu i generira CSR koji se potom predaje administr
 
 \subsection{Izdavanje certifikata}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/sign-certificate.png}
     \caption{Administrator potpisuje CSR zahtjev}
@@ -428,7 +429,7 @@ Korisnik unosi podatke o subjektu i generira CSR koji se potom predaje administr
 
 Na temelju zaprimljenog zahtjeva, administrator koristi Vault API za potpisivanje i izdavanje certifikata.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/generated-certificate.png}
     \caption{Prikaz izdanog certifikata}
@@ -436,13 +437,13 @@ Na temelju zaprimljenog zahtjeva, administrator koristi Vault API za potpisivanj
 
 \subsection{Pregled certifikata}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/certificates.png}
     \caption{Popis izdanih certifikata}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/certificate-details.png}
     \caption{Detalji o izdanim certifikatima}
@@ -452,7 +453,7 @@ Administrator može pregledavati izdane certifikate, uključujući informacije o
 
 \subsection{Opoziv certifikata}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/revoked.png}
     \caption{Opoziv nevažećeg certifikata}
@@ -462,7 +463,7 @@ U slučaju kompromitacije ili prestanka korištenja, administrator može opozvat
 
 \subsection{Primjer HTTPS poslužitelja}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/bank.png}
     \caption{Pristup HTTPS poslužitelju putem preglednika}
@@ -475,7 +476,7 @@ Prikazan je HTTPS poslužitelj pokrenut lokalno na adresi \texttt{bank.example.c
 Korisnik može generirati zahtjev za potpisivanje certifikata.
 Unosi podatke o subjektu te odabire privatni ključ.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/csr.png}
     \caption{Zahtjev za potpisivanje certifikata}
@@ -491,7 +492,7 @@ pomoću vlastitog certifikacijskog tijela. Također, kako bi certifikat
 bio valjani, bilo je potrebno instalirati root certifikat vlastitog
 certifikacijskog tijela na računlo.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/bank.png}
     \caption{Zahtjev za potpisivanje certifikata}
