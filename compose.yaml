@@ -17,14 +17,15 @@ services:
   vite-frontend:
     build:
       context: ./frontend
+      args:
+        VITE_VAULT_ADDR: http://localhost:8200
     container_name: vite-frontend
     ports:
       - "3000:80"
-    environment:
-      - VAULT_ADDR=http://vault:8200
-
     depends_on:
       - vault
+    environment:
+      - VITE_VAULT_ADDR=http://localhost:8200
 
 volumes:
   vault-config:

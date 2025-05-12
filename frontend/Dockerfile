@@ -1,6 +1,9 @@
 # ---------- Build Stage ----------
 FROM node:24-slim AS builder
 
+ARG VITE_VAULT_ADDR
+ENV VITE_VAULT_ADDR=$VITE_VAULT_ADDR
+
 # Set working directory
 WORKDIR /app
 
