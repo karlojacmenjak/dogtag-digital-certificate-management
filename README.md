@@ -90,6 +90,32 @@ Vault is configured via:
 
 ---
 
+## ⚠️ Security Disclaimer
+
+The Vault bootstrap process in `hashicorp-vault/docker-entrypoint.sh` is designed **strictly for demonstration purposes** and must **not be used in production environments**. Here's why:
+
+### ❌ Unsafe Behaviors in the Demo Script
+
+- **Plaintext secrets**: The unseal key and root token are written to disk (`init-keys.txt`) without encryption.
+- **Auto-unseal logic**: The script unseals Vault automatically on startup, which defeats Vault’s secure initialization process.
+- **Minimal key shares**: Vault is initialized with `-key-shares=1 -key-threshold=1`, meaning anyone with that one key can unseal Vault.
+- **Root token usage**: The script logs in as root for configuration, a bad practice that violates the principle of least privilege.
+- **No TLS**: Vault runs over HTTP (`http://127.0.0.1:8200`), which is acceptable only for local testing.
+- **No authentication or control**: The script assumes full access and blindly enables/configures PKI backends and policies.
+
+### ✅ If You're Adapting This for Real Use
+
+- Enable TLS on Vault with a valid certificate.
+- Use a secure auto-unseal method (e.g., cloud KMS integration).
+- Never store sensitive keys unencrypted on disk.
+- Revoke the root token after initial configuration.
+- Use policies and AppRole for secure access control.
+- Use multi-key initialization with quorum (e.g., 5 shares, threshold 3).
+
+This setup is intentionally insecure to help you learn the moving parts of Vault and PKI. Treat it like a sandbox, not a foundation.
+
+---
+
 ## 📄 License
 
 This project is licensed under the MIT License.
