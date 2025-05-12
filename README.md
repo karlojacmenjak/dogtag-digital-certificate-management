@@ -73,7 +73,7 @@ This will launch a UI to create a CSR.
 ```bash
 cd bank
 npm install
-sudo node main.js
+sudo npm run start
 ```
 
 This starts the HTTPS server on [https://localhost](https://localhost). Ensure `secrets/private.pem` and `secrets/cert.crt` are present.
