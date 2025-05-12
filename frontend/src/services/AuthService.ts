@@ -7,7 +7,7 @@ export class AuthService {
       return false;
     }
 
-    let response = await fetch(Context.backend + "/v1//auth/token/lookup", {
+    let response = await fetch(Context.backend + "/v1/auth/token/lookup", {
       method: "POST",
       body: JSON.stringify({
         token: token,
