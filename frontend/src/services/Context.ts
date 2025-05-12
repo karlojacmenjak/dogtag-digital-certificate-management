@@ -1,3 +1,3 @@
 export class Context {
-  static backend = "http://localhost:8200";
+  static backend = import.meta.env.VAULT_ADDR;
 }

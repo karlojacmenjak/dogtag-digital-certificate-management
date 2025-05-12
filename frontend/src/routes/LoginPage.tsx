@@ -20,13 +20,7 @@ const LoginPage: Component = () => {
   return (
     <div class="flex flex-row min-h-screen justify-center items-center">
       <div class="card card-border bg-base-100 w-96 shadow-sm">
-        <figure>
-          <img
-            src="https://images.unsplash.com/photo-1454117096348-e4abbeba002c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Card Image"
-          />
-        </figure>
-        <div class="card-body bg-neutral-600">
+        <div class="card-body">
           <h2 class="card-title">Certificate Authority</h2>
           <p>
             Welcome to Certificate Authority management platform! To begin

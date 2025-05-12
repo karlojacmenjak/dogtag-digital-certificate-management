@@ -92,5 +92,19 @@ vault write identity/entity-alias name="$VAULT_USERNAME" \
 # Done
 echo "[vault-setup] Vault setup complete. Process will now continue in foreground."
 
+# Enable CORS
+if ! curl -s --header "X-Vault-Token: $ROOT_TOKEN" http://127.0.0.1:8200/v1/sys/config/cors | grep -q '"allowed_origins":'; then
+  echo "[vault-setup] Setting CORS configuration..."
+  curl --location 'http://127.0.0.1:8200/v1/sys/config/cors' \
+    --header "X-Vault-Token: $ROOT_TOKEN" \
+    --header 'Content-Type: application/json' \
+    --data '{
+      "allowed_origins": "*"
+    }'
+else
+  echo "[vault-setup] CORS already configured."
+fi
+
+
 # Bring Vault process back to foreground
 wait $VAULT_PID
