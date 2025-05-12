@@ -3,17 +3,126 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bank</title>
-
+    <title>NovaTrust Bank</title>
     <style>
       body {
+        margin: 0;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f7fa;
+        color: #333;
+      }
+      header {
+        background-color: #004481;
+        color: white;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      header h1 {
+        margin: 0;
+      }
+      nav a {
+        color: white;
+        margin-left: 20px;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .dashboard {
+        padding: 2rem;
+      }
+      .card {
+        background-color: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .card h2 {
+        margin-top: 0;
+      }
+      .button {
+        background-color: #004481;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 1rem;
+      }
+      .accounts {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+      .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      .profile-header img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #004481;
       }
     </style>
   </head>
   <body>
-    <div style="margin: 40px">
-      <p style="font-size: 32px">Bank</p>
+    <header>
+      <h1>NovaTrust Bank</h1>
+      <nav>
+        <a href="#">Dashboard</a>
+        <a href="#">Accounts</a>
+        <a href="#">Payments</a>
+        <a href="#">Settings</a>
+      </nav>
+    </header>
+
+    <div class="dashboard">
+      <div class="card">
+        <div class="profile-header">
+          <img src="profile_picture.jpg" alt="Profile Picture" />
+          <div>
+            <h2>Welcome back, Jane Doe</h2>
+            <p>Your last login was on May 10, 2025</p>
+            <button class="button">View Profile</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Accounts Overview</h2>
+        <div class="accounts">
+          <div class="card">
+            <h3>Checking Account</h3>
+            <p>Balance: $5,230.45</p>
+            <button class="button">View Details</button>
+          </div>
+          <div class="card">
+            <h3>Savings Account</h3>
+            <p>Balance: $12,890.77</p>
+            <button class="button">View Details</button>
+          </div>
+          <div class="card">
+            <h3>Credit Card</h3>
+            <p>Balance: -$1,230.12</p>
+            <button class="button">View Details</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Recent Transactions</h2>
+        <ul>
+          <li>Amazon Purchase - $82.14</li>
+          <li>Payroll Deposit - $2,300.00</li>
+          <li>Electric Bill - $129.87</li>
+        </ul>
+        <button class="button">See All Transactions</button>
+      </div>
     </div>
   </body>
 </html>
