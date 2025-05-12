@@ -347,7 +347,7 @@ Web aplikacija za upravljanje certifikatima će administratoru sustava omogućit
           Uloga označava predložak prema kojem se potpisuju digitalni certifikati korisnika.
     \item \textbf{Prikaz certifikata} - Administrator će moći vidjeti sve certifikate koje je izdalo vlastito certifikacijsko tijelo.
           Za svaki certifikat, administrator će vidjeti identifikacijske podatke o subjektu te razdoblje za koje je izdan certifikat.
-    \item \textbf{Izdavanje certifikata} - Administrator će moći izdati, odnosno potpisati digitalni certifikat korisnika.
+    \item \textbf{Izdavanje certifikata} - Administrator će moći izdati i potpisati digitalni certifikat korisnika.
           Administrator će izdati certifikat na temelju zahtjeva za potpisivanje certifikata (engl. Certificate signing request) kojeg će generirati korisnik za kojeg se izdaje certifikat.
     \item \textbf{Revociranje certifikata} - Administrator će moći revocirati certifikat, odnosno proglasiti ga nevažećim.
 \end{itemize}
@@ -375,6 +375,47 @@ Sustav se sastoji od 4 dijela:
           HTTPS poslužitelja.
     \item \textbf{Korisnik} - Korisnik komunicira s HTTPS poslužiteljem i provjerava valjanost digitalnog certifikata.
 \end{itemize}
+
+\pagebreak
+
+\section{Prikaz funkcionalnosti}
+
+\textbf{Autentifikacija}
+
+Administrator se mora autentificirati kako bi mogao koristiti sustav.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/login.png}
+    \caption{Prijava}
+\end{figure}
+
+\textbf{Generiranje zahtjeva za potpisivanje certifikata}
+
+Korisnik može generirati zahtjev za potpisivanje certifikata.
+Unosi podatke o subjektu te odabire privatni ključ.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/csr.png}
+    \caption{Zahtjev za potpisivanje certifikata}
+\end{figure}
+
+\textbf{Implementacija HTTPS poslužitelja}
+
+U nastavku je prikazana stranica HTTPS poslužitelja 
+na adresi bank.example.com koji je pokrenuti na lokalnom
+računalu.
+HTTPS poslužitelj koristi certifikat koji je generiran 
+pomoću vlastitog certifikacijskog tijela. Također, kako bi certifikat
+bio valjani, bilo je potrebno instalirati root certifikat vlastitog 
+certifikacijskog tijela na računlo.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/bank.png}
+    \caption{Zahtjev za potpisivanje certifikata}
+\end{figure}
 
 \chapter{Zaključak}
 
