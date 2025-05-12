@@ -1,6 +1,15 @@
 #!/bin/sh
 set -e
 
+# Load .env file if it exists
+if [ -f "/vault/config/.env" ]; then
+  echo "[vault-setup] Loading environment variables from .env..."
+  export $(grep -v '^#' /vault/config/.env | xargs)
+fi
+
+echo "[vault-setup] VAULT_USERNAME is: $VAULT_USERNAME"
+
+
 # Start Vault in the background
 vault server -config=/vault/config/local.json &
 VAULT_PID=$!
@@ -88,10 +97,6 @@ vault write identity/entity-alias name="$VAULT_USERNAME" \
   canonical_id="$ENTITY_ID" \
   mount_accessor="$USERPASS_ACCESSOR"
 
-
-# Done
-echo "[vault-setup] Vault setup complete. Process will now continue in foreground."
-
 # Enable CORS
 if ! curl -s --header "X-Vault-Token: $ROOT_TOKEN" http://127.0.0.1:8200/v1/sys/config/cors | grep -q '"allowed_origins":'; then
   echo "[vault-setup] Setting CORS configuration..."
@@ -105,6 +110,8 @@ else
   echo "[vault-setup] CORS already configured."
 fi
 
+# Done
+echo "[vault-setup] Vault setup complete. Process will now continue in foreground."
 
 # Bring Vault process back to foreground
 wait $VAULT_PID

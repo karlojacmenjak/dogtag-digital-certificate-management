@@ -13,19 +13,13 @@ services:
       - vault-config:/vault/config
       - vault-file:/vault/file
       - vault-logs:/vault/logs
-    env_file:
-      - .env
 
   vite-frontend:
     build:
       context: ./frontend
     container_name: vite-frontend
     ports:
-      - "5173:5173"
-    volumes:
-      - ./frontend:/app
-    working_dir: /app
-    command: npm run dev
+      - "3000:80"
     environment:
       - VAULT_ADDR=http://vault:8200
 

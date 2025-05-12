@@ -1,7 +1,7 @@
 import { useNavigate } from "@solidjs/router";
 import { createSignal, onMount, type Component } from "solid-js";
-import { Password } from "../components/password";
-import { Username } from "../components/username";
+import { Password } from "../components/Password";
+import { Username } from "../components/Username";
 import { AuthService } from "../services/AuthService";
 
 const LoginPage: Component = () => {
