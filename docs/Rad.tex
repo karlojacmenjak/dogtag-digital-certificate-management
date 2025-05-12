@@ -409,16 +409,6 @@ Administrator pristupa aplikaciji putem sučelja za prijavu. Time se osigurava d
 
 Uloge predstavljaju predloške koji definiraju uvjete za izdavanje certifikata. Mogu uključivati maksimalno trajanje, domene i dopuštene IP adrese.
 
-\subsection{Generiranje CSR-a}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{assets/csr.png}
-    \caption{Generiranje zahtjeva za potpisivanje certifikata (CSR)}
-\end{figure}
-
-Korisnik unosi podatke o subjektu i generira CSR koji se potom predaje administratoru sustava za izdavanje certifikata.
-
 \subsection{Izdavanje certifikata}
 
 \begin{figure}[H]
@@ -469,7 +459,12 @@ U slučaju kompromitacije ili prestanka korištenja, administrator može opozvat
     \caption{Pristup HTTPS poslužitelju putem preglednika}
 \end{figure}
 
-Prikazan je HTTPS poslužitelj pokrenut lokalno na adresi \texttt{bank.example.com}, s certifikatom izdanom vlastitim CA-om. Kako bi certifikat bio prepoznat kao valjan, root certifikat je prethodno instaliran u operativni sustav.
+Prikazana je stranica HTTPS poslužitelja
+na adresi \texttt{bank.example.com} koji je pokrenuti na lokalnom računalu.
+HTTPS poslužitelj koristi certifikat koji je generiran
+pomoću vlastitog certifikacijskog tijela. Također, kako bi certifikat
+bio valjani, bilo je potrebno instalirati root certifikat vlastitog
+certifikacijskog tijela na računlo.
 
 \subsection{Generiranje zahtjeva za potpisivanje certifikata}
 
@@ -479,22 +474,6 @@ Unosi podatke o subjektu te odabire privatni ključ.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/csr.png}
-    \caption{Zahtjev za potpisivanje certifikata}
-\end{figure}
-
-\subsection{Implementacija HTTPS poslužitelja}
-
-U nastavku je prikazana stranica HTTPS poslužitelja
-na adresi bank.example.com koji je pokrenuti na lokalnom
-računalu.
-HTTPS poslužitelj koristi certifikat koji je generiran
-pomoću vlastitog certifikacijskog tijela. Također, kako bi certifikat
-bio valjani, bilo je potrebno instalirati root certifikat vlastitog
-certifikacijskog tijela na računlo.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{assets/bank.png}
     \caption{Zahtjev za potpisivanje certifikata}
 \end{figure}
 
