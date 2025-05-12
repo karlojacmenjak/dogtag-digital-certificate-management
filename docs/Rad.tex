@@ -380,17 +380,97 @@ Sustav se sastoji od 4 dijela:
 
 \section{Prikaz funkcionalnosti}
 
-\textbf{Autentifikacija}
+U nastavku ovoga poglavlja opisane su glavne funkcionalnosti sustava na primjeru bankovne aplikacije koja koristi digitalni certifikat za enkripciju sadržaja na web sučelju.
 
-Administrator se mora autentificirati kako bi mogao koristiti sustav.
+\subsection{Autentifikacija administratora}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{assets/login.png}
-    \caption{Prijava}
+    \caption{Prijava administratora u sustav}
 \end{figure}
 
-\textbf{Generiranje zahtjeva za potpisivanje certifikata}
+Administrator pristupa aplikaciji putem sučelja za prijavu. Time se osigurava da samo ovlašteni korisnici imaju mogućnost upravljanja certifikatima.
+
+\subsection{Upravljanje ulogama}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/roles.png}
+    \caption{Popis uloga za izdavanje certifikata}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/role-details.png}
+    \caption{Detalji određene uloge}
+\end{figure}
+
+Uloge predstavljaju predloške koji definiraju uvjete za izdavanje certifikata. Mogu uključivati maksimalno trajanje, domene i dopuštene IP adrese.
+
+\subsection{Generiranje CSR-a}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/csr.png}
+    \caption{Generiranje zahtjeva za potpisivanje certifikata (CSR)}
+\end{figure}
+
+Korisnik unosi podatke o subjektu i generira CSR koji se potom predaje administratoru sustava za izdavanje certifikata.
+
+\subsection{Izdavanje certifikata}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/sign-certificate.png}
+    \caption{Administrator potpisuje CSR zahtjev}
+\end{figure}
+
+Na temelju zaprimljenog zahtjeva, administrator koristi Vault API za potpisivanje i izdavanje certifikata.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/generated-certificate.png}
+    \caption{Prikaz izdanog certifikata}
+\end{figure}
+
+\subsection{Pregled certifikata}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/certificates.png}
+    \caption{Popis izdanih certifikata}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/certificate-details.png}
+    \caption{Detalji o izdanim certifikatima}
+\end{figure}
+
+Administrator može pregledavati izdane certifikate, uključujući informacije o subjektu, vremenskom važenju i statusu.
+
+\subsection{Opoziv certifikata}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/revoked.png}
+    \caption{Opoziv nevažećeg certifikata}
+\end{figure}
+
+U slučaju kompromitacije ili prestanka korištenja, administrator može opozvati certifikat i tako spriječiti njegovo daljnje korištenje.
+
+\subsection{Primjer HTTPS poslužitelja}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{assets/bank.png}
+    \caption{Pristup HTTPS poslužitelju putem preglednika}
+\end{figure}
+
+Prikazan je HTTPS poslužitelj pokrenut lokalno na adresi \texttt{bank.example.com}, s certifikatom izdanom vlastitim CA-om. Kako bi certifikat bio prepoznat kao valjan, root certifikat je prethodno instaliran u operativni sustav.
+
+\subsection{Generiranje zahtjeva za potpisivanje certifikata}
 
 Korisnik može generirati zahtjev za potpisivanje certifikata.
 Unosi podatke o subjektu te odabire privatni ključ.
@@ -401,14 +481,14 @@ Unosi podatke o subjektu te odabire privatni ključ.
     \caption{Zahtjev za potpisivanje certifikata}
 \end{figure}
 
-\textbf{Implementacija HTTPS poslužitelja}
+\subsection{Implementacija HTTPS poslužitelja}
 
-U nastavku je prikazana stranica HTTPS poslužitelja 
+U nastavku je prikazana stranica HTTPS poslužitelja
 na adresi bank.example.com koji je pokrenuti na lokalnom
 računalu.
-HTTPS poslužitelj koristi certifikat koji je generiran 
+HTTPS poslužitelj koristi certifikat koji je generiran
 pomoću vlastitog certifikacijskog tijela. Također, kako bi certifikat
-bio valjani, bilo je potrebno instalirati root certifikat vlastitog 
+bio valjani, bilo je potrebno instalirati root certifikat vlastitog
 certifikacijskog tijela na računlo.
 
 \begin{figure}[htbp]
@@ -426,7 +506,7 @@ Korištene su metode i tehnike temeljene na primjeni X.509 certifikata, simetri�
 što je rezultiralo efikasnijim upravljanjem životnim ciklusom certifikata i smanjenjem rizika od kompromitacije.
 Proces izdavanja i opoziva certifikata dodatno doprinosi visokoj razini sigurnosti, dok su primijenjeni programski
 alati omogućili fleksibilnost i prilagodbu sustava specifičnim potrebama organizacije.
-Rad pokazuje da implementacija vlastitog certifikacijskog tijela predstavlja fleksibilno 
+Rad pokazuje da implementacija vlastitog certifikacijskog tijela predstavlja fleksibilno
 rješenje u organizacijama koje žele zaštititi svoje sustave.
 
 \makebackmatter
